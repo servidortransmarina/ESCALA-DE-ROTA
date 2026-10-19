@@ -78,86 +78,11 @@ td{padding:12px 10px}
 .microzone-status.ok{color:#176b3d}.microzone-status.warn{color:#a56220}
 #financeView{width:min(100%,1120px);margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}
 @media(max-width:720px){#financeView{padding-left:14px;padding-right:14px}.finance-subnav .subtab{padding:8px 10px;font-size:11px}}
-</style><style id="mobile-layout-fix">
-/* Ajustes exclusivos para a escala em telas pequenas */
-@media(max-width:720px){
-  .toolbar{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    align-items:stretch;
-    gap:8px;
-    padding:10px;
-  }
-  .toolbar>.search{grid-column:1/-1;min-width:0;width:100%;}
-  .toolbar>.search input{height:42px;font-size:14px;}
-  .toolbar>.select{width:100%;min-width:0;height:42px;}
-  .toolbar>.xls-menu{width:100%;min-width:0;}
-  .toolbar>.xls-menu>summary{width:100%;min-height:42px;}
-  .toolbar>.btn{width:100%;min-width:0;min-height:42px;height:auto;padding:6px 8px;line-height:1.2;white-space:normal;}
-  .toolbar>.share-trigger{grid-column:auto;order:initial!important;}
-  .toolbar>.xls-menu .xls-dropdown{right:0;left:0;min-width:0;width:100%;}
-  .tablewrap{padding:0 9px 9px;}
-  tbody tr{
-    margin:0 0 10px;
-    padding:13px 12px;
-    border:1px solid var(--line);
-    border-radius:13px;
-    background:#fff;
-    box-shadow:0 3px 12px #1113150a;
-  }
-  tbody tr:last-child{border-bottom:1px solid var(--line);}
-  td{
-    display:grid;
-    grid-template-columns:88px minmax(0,1fr);
-    align-items:start;
-    column-gap:8px;
-    padding:7px 0;
-    font-size:12px;
-    line-height:1.4;
-    overflow-wrap:anywhere;
-  }
-  td:before{
-    color:var(--muted);
-    font-size:10px;
-    font-weight:750;
-    line-height:1.4;
-    text-transform:uppercase;
-    letter-spacing:.025em;
-  }
-  td:nth-child(1):before{content:"Box / carga";}
-  td:nth-child(2):before{content:"Motorista / equipe";}
-  td:nth-child(3):before{content:"Veículo";}
-  td:nth-child(4):before{content:"Status";}
-  td:nth-child(5):before{content:"STD online";}
-  td:nth-child(6):before{content:"Rota / região";}
-  td:nth-child(7):before{content:"Qtd. paradas";}
-  td:nth-child(8):before{content:"Cubagem";}
-  td:nth-child(9):before{content:"Data";}
-  td:nth-child(10):before{content:"Transportadora";}
-  td:nth-child(11):before{content:"";}
-  td:nth-child(1){padding-right:61px;}
-  td:nth-child(1) .sub,td:nth-child(2) .sub{margin-top:3px;}
-  td:nth-child(4)>div,td:nth-child(5)>div{min-width:0;}
-  td:nth-child(4) .btn,td:nth-child(5) .btn{max-width:100%;white-space:normal;line-height:1.2;margin-top:5px;}
-  td:nth-child(6) .mainval{line-height:1.45;}
-  td.hide-mobile{display:none!important;}
-  td.mobileline{display:inline-block;width:32%;padding-top:8px;color:var(--muted);font-size:10px;}
-  td.mobileline b{display:block;color:var(--ink);font-size:12px;margin-top:2px;}
-  .rowactions{position:absolute;right:11px;top:10px;}
-  .boardhead{padding:14px 13px;gap:8px;}
-  .boardhead>div{min-width:0;}
-  .boardhead>span{white-space:nowrap;}
-  .boardhead .sub{line-height:1.4;}
-  .foot{padding:10px 13px;}
-}
-@media(max-width:380px){
-  .toolbar{gap:7px;padding:9px;}
-  .toolbar>.btn{font-size:11px;}
-  td{grid-template-columns:76px minmax(0,1fr);column-gap:7px;}
-  tbody tr{padding:11px 10px;}
-}
-
 </style>
+<style>
+.summary-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.scanner-overlay{position:fixed;inset:0;z-index:1000;background:#101719eF;display:none;align-items:center;justify-content:center;padding:14px}.scanner-overlay.open{display:flex}.scanner-modal{width:min(900px,100%);max-height:96vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 24px 80px #0008;color:#17201e}.scanner-head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid #e5e8ea}.scanner-head h2{font-size:18px;margin:0}.scanner-body{padding:14px}.scanner-stage{position:relative;width:100%;background:#111;border-radius:12px;overflow:hidden;min-height:220px;display:grid;place-items:center}.scanner-stage video,.scanner-stage img{display:block;width:100%;max-height:68vh;object-fit:contain}.scanner-stage svg{position:absolute;inset:0;width:100%;height:100%;touch-action:none}.scanner-stage .scan-poly{fill:#36d39925;stroke:#35d399;stroke-width:4;vector-effect:non-scaling-stroke}.scanner-stage .scan-handle{fill:#fff;stroke:#059669;stroke-width:3;vector-effect:non-scaling-stroke;cursor:grab}.scanner-stage .scan-guide{position:absolute;inset:10%;border:2px dashed #ffffff88;border-radius:8px;pointer-events:none}.scanner-status{min-height:22px;margin:10px 2px;color:#52615d;font-size:13px}.scanner-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;padding-top:10px}.scanner-controls .btn{min-height:40px}.scanner-tip{font-size:12px;color:#68736f;text-align:center;margin:8px 0 0}.scanner-preview{max-width:100%;max-height:68vh;object-fit:contain;background:#171b1b;border-radius:8px}.scanner-stage canvas{max-width:100%;max-height:68vh;object-fit:contain}.scan-shutter{width:58px;height:58px;border-radius:50%;border:5px solid #fff;background:#e53935;box-shadow:0 0 0 2px #222;cursor:pointer}.scan-shutter:disabled{opacity:.45}@media(max-width:600px){.scanner-overlay{padding:0}.scanner-modal{width:100%;max-height:100vh;height:100%;border-radius:0}.scanner-stage{min-height:42vh}.scanner-stage video,.scanner-stage img{max-height:62vh}.scanner-head{padding:12px}}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -183,7 +108,7 @@ td{padding:12px 10px}
 <section class="catalogIntro"><div class="catalogToolbar"><div><h2>Financeiro por carga</h2><p>Abra uma carga para revisar entregas, paradas e valores de frete.</p></div><button class="btn" id="addMgmBtn" type="button">＋ Configurar MGM</button></div></section>
 <div class="finance-subnav" role="tablist" aria-label="Seções do Financeiro"><button class="subtab" id="financeLoadsTab" type="button" role="tab" aria-selected="false">Cargas e faturamento</button><button class="subtab active" id="microzonesTab" type="button" role="tab" aria-selected="true">Microzonas</button></div><div id="microzonesContent"><section class="panel" style="padding:16px;margin-bottom:14px"><strong>Faixas de tarifa por MGM</strong><div class="sub" style="margin:4px 0 10px">A faixa é definida pelo total de paradas da carga: de 0 a 24 ou de 25 a 40. Acima de 40 paradas, o frete fica pendente de uma faixa cadastrada.</div><div class="tablewrap"><table><thead><tr><th>MGM</th><th>0 a 24 paradas</th><th>25 a 40 paradas</th><th></th></tr></thead><tbody id="mgmRates"></tbody></table></div></section>
 </section><section class="panel" style="padding:16px;margin-bottom:14px"><div class="boardhead" style="padding:0 0 10px"><div><strong>Microzonas da base regional</strong><div class="sub">Microzonas identificadas pelos CEPs da região. A tarifa aplicada depende do total de paradas da carga.</div></div><span id="microzoneCount"></span></div><div class="catalogSearch" style="padding:8px 0"><input id="microzoneSearch" placeholder="Buscar MGM ou código da microzona" aria-label="Buscar microzonas"><span id="microzoneCepCount"></span></div><div class="tablewrap"><table class="catalogTable"><thead><tr><th>Microzona / MGM</th><th>CEPs na base</th><th>0 a 24 paradas</th><th>25 a 40 paradas</th></tr></thead><tbody id="microzoneRows"></tbody></table></div></section></div><div id="financeLoadsContent"><section class="panel"><div class="boardhead"><div><strong>Cargas</strong><div class="sub">Selecione uma carga para abrir o relatório financeiro.</div></div><span id="financeLoadCount">0 cargas</span></div><div id="financeLoadList" class="finance-load-list"></div></section>
-<section class="panel hidden" id="financeReport" style="margin-top:14px"><div class="boardhead"><div><strong id="financeTitle">Relatório da carga</strong><div class="sub" id="financeSubtitle"></div></div><button class="btn" id="attachSummaryBtn" type="button">Anexar resumo</button><input id="summaryPhotoInput" class="hidden" type="file" accept="image/*" capture="environment"></div><div class="finance-stats"><div><small>ENTREGAS</small><strong id="financeDeliveryCount">0</strong></div><div><small>PARADAS</small><strong id="financeStopCount">0</strong></div><div><small>VALOR TOTAL DO FRETE</small><strong id="financeFreightTotal">R$ 0,00</strong></div></div><div class="finance-photo-area" id="financePhotoArea"></div><div class="modalactions" style="justify-content:flex-start"><button class="btn primary" id="addDeliveryBtn" type="button">＋ Adicionar entrega</button><span class="muted">Revise os dados antes de confirmar para a carga.</span></div><div id="financeReviewActions" class="modalactions hidden"><span class="finance-review-hint" id="financeReviewHint">Revisão pendente — os totais mostrados são uma prévia.</span><div><button class="btn" id="cancelFinanceReview" type="button">Descartar revisão</button><button class="btn primary" id="confirmFinanceReview" type="button">Confirmar e salvar na carga</button></div></div><div class="tablewrap"><table class="finance-table"><thead><tr><th>NF</th><th>Cliente</th><th>CEP</th><th>Endereço</th><th>Nº</th><th>Bairro</th><th>MGM</th><th>Valor da MGM</th><th></th></tr></thead><tbody id="financeDeliveries"></tbody></table></div></section>
+<section class="panel hidden" id="financeReport" style="margin-top:14px"><div class="boardhead"><div><strong id="financeTitle">Relatório da carga</strong><div class="sub" id="financeSubtitle"></div></div><div class="summary-actions"><button class="btn primary" id="scanSummaryBtn" type="button">▣ Digitalizar resumo</button><button class="btn" id="attachSummaryBtn" type="button">Escolher foto</button><input id="summaryPhotoInput" class="hidden" type="file" accept="image/*" capture="environment"></div></div><div class="finance-stats"><div><small>ENTREGAS</small><strong id="financeDeliveryCount">0</strong></div><div><small>PARADAS</small><strong id="financeStopCount">0</strong></div><div><small>VALOR TOTAL DO FRETE</small><strong id="financeFreightTotal">R$ 0,00</strong></div></div><div class="finance-photo-area" id="financePhotoArea"></div><div class="modalactions" style="justify-content:flex-start"><button class="btn primary" id="addDeliveryBtn" type="button">＋ Adicionar entrega</button><span class="muted">Revise os dados antes de confirmar para a carga.</span></div><div id="financeReviewActions" class="modalactions hidden"><span class="finance-review-hint" id="financeReviewHint">Revisão pendente — os totais mostrados são uma prévia.</span><div><button class="btn" id="cancelFinanceReview" type="button">Descartar revisão</button><button class="btn primary" id="confirmFinanceReview" type="button">Confirmar e salvar na carga</button></div></div><div class="tablewrap"><table class="finance-table"><thead><tr><th>NF</th><th>Cliente</th><th>CEP</th><th>Endereço</th><th>Nº</th><th>Bairro</th><th>MGM</th><th>Valor da MGM</th><th></th></tr></thead><tbody id="financeDeliveries"></tbody></table></div></section>
 <div class="notice"><strong>Importante:</strong> a foto é processada neste aparelho com leitura OCR para apoiar a revisão; confira e complete os campos de cada entrega antes de salvar. Os dados e tarifas ficam salvos localmente neste navegador.</div>
 </div>
 </div>
@@ -321,7 +246,7 @@ async function attachSummary(file){if(!file||!financeLoad)return;const load=fina
 el('financeTab').onclick=()=>showMainView('finance');el('financeLoadsTab').onclick=()=>showFinanceSubtab('loads');el('microzonesTab').onclick=()=>showFinanceSubtab('microzones');el('microzoneSearch').addEventListener('input',renderMicrozones);el('confirmFinanceReview').onclick=confirmFinanceReview;el('cancelFinanceReview').onclick=cancelFinanceReview;
 el('scaleTab').onclick=()=>showMainView('scale');el('catalogTab').onclick=()=>showMainView('catalog');
 el('financeLoadList').addEventListener('click',e=>{const b=e.target.closest('[data-finance-load]');if(b){financeLoad=b.dataset.financeLoad;renderFinance()}});
-el('attachSummaryBtn').onclick=()=>el('summaryPhotoInput').click();el('summaryPhotoInput').addEventListener('change',e=>attachSummary(e.target.files?.[0]));el('addDeliveryBtn').onclick=addDelivery;
+el('attachSummaryBtn').onclick=()=>{el('summaryPhotoInput').dataset.fromScanner='';el('summaryPhotoInput').click()};el('addDeliveryBtn').onclick=addDelivery;
 el('addMgmBtn').onclick=()=>{const mgm=prompt('Nome/código do MGM:');if(!mgm?.trim())return;if(financeData.rates.some(r=>deliveryKey(r.mgm)===deliveryKey(mgm))){notify('Este MGM já está cadastrado');return}financeData.rates.push({mgm:mgm.trim(),upto24:'',over24:''});saveFinance();renderFinance()};
 el('mgmRates').addEventListener('input',e=>{const x=e.target.closest('[data-rate]');if(!x)return;financeData.rates[Number(x.dataset.rate)][x.dataset.band]=x.value;saveFinance()});el('mgmRates').addEventListener('change',()=>renderFinance());el('mgmRates').addEventListener('click',e=>{const b=e.target.closest('[data-rate-remove]');if(b){financeData.rates.splice(Number(b.dataset.rateRemove),1);saveFinance();renderFinance()}});
 el('financeDeliveries').addEventListener('change',e=>{const x=e.target.closest('[data-delivery][data-field]');if(!x||!financeLoad)return;const delivery=currentDeliveries(chargeData(financeLoad))[Number(x.dataset.delivery)];delivery[x.dataset.field]=x.value;if(x.dataset.field==='mgm')updateCepStatus(delivery,x.closest('tr'));saveFinance();renderFinance()});
@@ -340,8 +265,46 @@ function exportRowsCsv(rows,filename){const csv=rows.map(r=>r.map(v=>'"'+String(
 function renderFreightCatalog(){const rows=el('freightRows');if(!rows)return;const q=(el('freightSearch')?.value||'').toLocaleLowerCase('pt-BR'),list=(financeData?.rates||[]).filter(x=>String(x.mgm).toLocaleLowerCase('pt-BR').includes(q));el('freightCount').textContent=`${list.length} tarifas cadastradas`;rows.innerHTML=list.map(x=>`<div class="base-card"><div><strong>${esc(x.mgm)}</strong><small>0–24 paradas: ${moneyBR(x.upto24)} · 25–40 paradas: ${moneyBR(x.over24)}</small></div><button class="iconbtn" type="button" data-freight-edit="${esc(x.mgm)}">Editar na aba Microzonas</button></div>`).join('')||'<div class="empty">Nenhuma tarifa encontrada.</div>'}
 function wirePermanentBases(){loadStreetEdits();el('manageStreetsBtn').onclick=()=>{el('streetsEditor').classList.toggle('hidden');renderStreetCatalog()};el('cancelStreetBtn').onclick=()=>{el('streetsEditor').classList.add('hidden');resetStreetForm()};el('streetSearch').addEventListener('input',renderStreetCatalog);el('saveStreetBtn').onclick=()=>{const cep=el('streetCep').value.replace(/\D/g,'');const entry={cep,name:el('streetName').value.trim(),district:el('streetDistrict').value.trim(),mgm:el('streetMgm').value.trim().toUpperCase()};if(cep.length!==8||!entry.name){notify('Informe um CEP válido e o logradouro');return}const index=el('saveStreetBtn').dataset.edit;if(index!==''){streetEdits[Number(index)]=entry}else streetEdits.unshift(entry);saveStreetEdits();resetStreetForm();renderStreetCatalog();notify('Alteração local salva; será sincronizada quando o banco online for integrado')};el('streetRows').addEventListener('click',e=>{const edit=e.target.closest('[data-street-edit]'),del=e.target.closest('[data-street-delete]');if(edit){const x=streetEdits[Number(edit.dataset.streetEdit)];el('streetCep').value=x.cep;el('streetName').value=x.name;el('streetDistrict').value=x.district;el('streetMgm').value=x.mgm;el('saveStreetBtn').dataset.edit=edit.dataset.streetEdit;el('saveStreetBtn').textContent='Salvar alteração'}else if(del&&confirm('Excluir esta alteração local? A base integrada original não será alterada.')){streetEdits.splice(Number(del.dataset.streetDelete),1);saveStreetEdits();renderStreetCatalog()}});el('exportStreetsBtn').onclick=()=>exportRowsCsv([['CEP','LOGRADOURO','BAIRRO','MGM'],...streetEdits.map(x=>[x.cep,x.name,x.district,x.mgm])],'alteracoes-logradouros.csv');el('manageFreightBtn').onclick=()=>{el('freightEditor').classList.toggle('hidden');renderFreightCatalog()};el('freightSearch').addEventListener('input',renderFreightCatalog);el('exportFreightBtn').onclick=()=>exportRowsCsv([['MGM','0 A 24 PARADAS','25 A 40 PARADAS'],...(financeData?.rates||[]).map(x=>[x.mgm,x.upto24,x.over24])],'tabela-frete.csv')}
 
+
+// Scanner de resumo: captura automática estável, recorte em perspectiva e revisão dos cantos.
+let scanStream=null,scanRAF=0,scanStableSince=0,scanLastCorners=null,scanSourceImage=null,scanCorners=null,scanRotation=0,scanPreviewTimer=0;
+const scanEl=id=>document.getElementById(id);
+function stopScannerCamera(){if(scanRAF)cancelAnimationFrame(scanRAF);scanRAF=0;if(scanStream){scanStream.getTracks().forEach(t=>t.stop());scanStream=null}scanEl('scannerVideo').srcObject=null}
+function openScanner(){scanEl('scannerOverlay').classList.add('open');scanEl('scannerStill').hidden=true;scanEl('scannerOutput').hidden=true;scanEl('scannerGuides').hidden=true;scanEl('scannerVideo').hidden=false;scanEl('scannerGuide').hidden=false;scanEl('scannerLiveControls').hidden=false;scanEl('scannerEditControls').hidden=true;scanEl('scannerStatus').textContent='Solicitando acesso à câmera…';scanStableSince=0;startScannerCamera()}
+async function startScannerCamera(){try{stopScannerCamera();scanStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false});const v=scanEl('scannerVideo');v.srcObject=scanStream;await v.play();scanEl('scannerStatus').textContent='Procurando as bordas da folha… mantenha o aparelho firme.';detectScannerFrame()}catch(e){scanEl('scannerStatus').textContent='Não foi possível abrir a câmera. Autorize o acesso ou escolha uma imagem.';scanEl('scannerShutter').disabled=false}}
+function detectPaperCorners(video){const w=320,h=Math.max(180,Math.round(320*video.videoHeight/video.videoWidth));const c=scanEl('scannerDetectCanvas')||document.createElement('canvas');c.id='scannerDetectCanvas';c.width=w;c.height=h;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(video,0,0,w,h);const d=x.getImageData(0,0,w,h).data,n=w*h,seen=new Uint8Array(n),queue=new Int32Array(n);let best=null,bestSize=0;const lum=(i)=>{const r=d[i*4],g=d[i*4+1],b=d[i*4+2];return (r+g+b)/3};
+ // Detect a large, bright low-saturation connected sheet region on the downsampled preview.
+ for(let seed=0;seed<n;seed++){if(seen[seed])continue;const p=seed*4,lo=lum(seed),sat=Math.max(d[p],d[p+1],d[p+2])-Math.min(d[p],d[p+1],d[p+2]);if(lo<155||sat>90){seen[seed]=1;continue}let head=0,tail=0;queue[tail++]=seed;seen[seed]=1;let minX=w,minY=h,maxX=0,maxY=0,minSum=1e9,maxSum=-1e9,minDiff=1e9,maxDiff=-1e9,area=0;while(head<tail){const q=queue[head++],xx=q%w,yy=(q/w)|0;area++;minX=Math.min(minX,xx);maxX=Math.max(maxX,xx);minY=Math.min(minY,yy);maxY=Math.max(maxY,yy);if(xx+yy<minSum){minSum=xx+yy}if(xx+yy>maxSum){maxSum=xx+yy}if(xx-yy<minDiff){minDiff=xx-yy}if(xx-yy>maxDiff){maxDiff=xx-yy}const nb=[xx>0?q-1:-1,xx<w-1?q+1:-1,yy>0?q-w:-1,yy<h-1?q+w:-1];for(const z of nb){if(z<0||seen[z])continue;const k=z*4,L=(d[k]+d[k+1]+d[k+2])/3,S=Math.max(d[k],d[k+1],d[k+2])-Math.min(d[k],d[k+1],d[k+2]);if(L>155&&S<90){seen[z]=1;queue[tail++]=z}else seen[z]=1}}if(area>bestSize&&area>n*.07){bestSize=area;best={minX,minY,maxX,maxY,minSum,maxSum,minDiff,maxDiff,area}}}
+ if(!best)return null;const {minX,minY,maxX,maxY,minSum,maxSum,minDiff,maxDiff,area}=best;if(area<n*.12||area>n*.94)return null;let pts=[[(minSum+minDiff)/2,(minSum-minDiff)/2],[(minSum+maxDiff)/2,(minSum-maxDiff)/2],[(maxSum+maxDiff)/2,(maxSum-maxDiff)/2],[(maxSum+minDiff)/2,(maxSum-minDiff)/2]]; // intersections of the four corner extrema
+ const cx=pts.reduce((a,p)=>a+p[0],0)/4,cy=pts.reduce((a,p)=>a+p[1],0)/4;pts.sort((a,b)=>Math.atan2(a[1]-cy,a[0]-cx)-Math.atan2(b[1]-cy,b[0]-cx));let start=pts.reduce((bestI,p,i)=>p[0]+p[1]<pts[bestI][0]+pts[bestI][1]?i:bestI,0);pts=[...pts.slice(start),...pts.slice(0,start)];if(pts[1][0]<pts[3][0])pts=[pts[0],pts[3],pts[2],pts[1]];const scaleX=video.videoWidth/w,scaleY=video.videoHeight/h;const corners=pts.map(p=>[Math.max(0,Math.min(video.videoWidth,p[0]*scaleX)),Math.max(0,Math.min(video.videoHeight,p[1]*scaleY))]);const areaRatio=area/n;if(areaRatio<.15)return null;return corners}
+function drawLiveGuides(corners){const svg=scanEl('scannerGuides'),v=scanEl('scannerVideo');svg.setAttribute('viewBox',`0 0 ${v.videoWidth} ${v.videoHeight}`);svg.innerHTML=`<polygon class="scan-poly" points="${corners.map(p=>p.join(',')).join(' ')}"/>`}
+function detectScannerFrame(){const v=scanEl('scannerVideo');if(!v.videoWidth){scanRAF=requestAnimationFrame(detectScannerFrame);return}const corners=detectPaperCorners(v);const status=scanEl('scannerStatus');if(!corners){scanStableSince=0;scanLastCorners=null;scanEl('scannerGuides').hidden=true;status.textContent='Enquadre a folha inteira, com fundo contrastante e boa iluminação.'}else{scanEl('scannerGuides').hidden=false;drawLiveGuides(corners);const center=corners.reduce((a,p)=>[a[0]+p[0]/4,a[1]+p[1]/4],[0,0]);const area=Math.abs(corners.reduce((a,p,i)=>{const q=corners[(i+1)%4];return a+p[0]*q[1]-q[0]*p[1]},0))/2/(v.videoWidth*v.videoHeight);const stable=scanLastCorners&&corners.every((p,i)=>Math.hypot(p[0]-scanLastCorners[i][0],p[1]-scanLastCorners[i][1])<v.videoWidth*.018);scanLastCorners=corners;if(area>.12&&area<.92){if(stable){if(!scanStableSince)scanStableSince=performance.now();const remain=Math.max(0,1.15-(performance.now()-scanStableSince)/1000);status.textContent=remain>0?`Folha enquadrada. Captura automática em ${remain.toFixed(1)} s…`:'Capturando…';if(remain===0){captureScannerFrame(corners);return}}else{scanStableSince=performance.now();status.textContent='Folha detectada. Mantenha o aparelho firme…'}}else{scanStableSince=0;status.textContent='Ajuste a folha para que apareça inteira na câmera.'}}scanRAF=requestAnimationFrame(detectScannerFrame)}
+function captureScannerFrame(corners){const v=scanEl('scannerVideo'),c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);scanSourceImage=c;scanCorners=corners.map(p=>p.slice());scanRotation=0;showScannerReview()}
+function showScannerReview(){stopScannerCamera();scanEl('scannerVideo').hidden=true;scanEl('scannerStill').hidden=false;scanEl('scannerGuide').hidden=true;scanEl('scannerLiveControls').hidden=true;scanEl('scannerEditControls').hidden=false;scanEl('scannerStatus').textContent='Confira o recorte. Arraste os pontos verdes para ajustar os cantos; gire até o texto ficar na horizontal e legível.';const img=scanEl('scannerStill');img.src=scanSourceImage.toDataURL('image/jpeg',.9);const svg=scanEl('scannerGuides');svg.hidden=false;svg.setAttribute('viewBox',`0 0 ${scanSourceImage.width} ${scanSourceImage.height}`);svg.innerHTML=`<polygon class="scan-poly" points="${scanCorners.map(p=>p.join(',')).join(' ')}"/>`+scanCorners.map((p,i)=>`<circle class="scan-handle" data-corner="${i}" cx="${p[0]}" cy="${p[1]}" r="${Math.max(18,scanSourceImage.width/90)}"/>`).join('');renderScannerCrop()}
+function affineTriangle(ctx,src,dst){const [s0,s1,s2]=src,[d0,d1,d2]=dst;const den=s0[0]*(s1[1]-s2[1])+s1[0]*(s2[1]-s0[1])+s2[0]*(s0[1]-s1[1]);if(Math.abs(den)<.001)return;const a=(d0[0]*(s1[1]-s2[1])+d1[0]*(s2[1]-s0[1])+d2[0]*(s0[1]-s1[1]))/den,b=(d0[1]*(s1[1]-s2[1])+d1[1]*(s2[1]-s0[1])+d2[1]*(s0[1]-s1[1]))/den,c=(d0[0]*(s2[0]-s1[0])+d1[0]*(s0[0]-s2[0])+d2[0]*(s1[0]-s0[0]))/den,d=(d0[1]*(s2[0]-s1[0])+d1[1]*(s0[0]-s2[0])+d2[1]*(s1[0]-s0[0]))/den,e=(d0[0]*(s1[0]*s2[1]-s2[0]*s1[1])+d1[0]*(s2[0]*s0[1]-s0[0]*s2[1])+d2[0]*(s0[0]*s1[1]-s1[0]*s0[1]))/den,f=(d0[1]*(s1[0]*s2[1]-s2[0]*s1[1])+d1[1]*(s2[0]*s0[1]-s0[0]*s2[1])+d2[1]*(s0[0]*s1[1]-s1[0]*s0[1]))/den;ctx.save();ctx.beginPath();ctx.moveTo(...dst[0]);ctx.lineTo(...dst[1]);ctx.lineTo(...dst[2]);ctx.closePath();ctx.clip();ctx.transform(a,b,c,d,e,f);ctx.drawImage(scanSourceImage,0,0);ctx.restore()}
+function renderScannerCrop(){if(!scanSourceImage||!scanCorners)return;const [tl,tr,br,bl]=scanCorners,dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),W=Math.max(300,Math.round((dist(tl,tr)+dist(bl,br))/2)),H=Math.max(300,Math.round((dist(tl,bl)+dist(tr,br))/2));let w=W,h=H;if(scanRotation%2) [w,h]=[H,W];const c=scanEl('scannerOutput');c.hidden=false;c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);let dest=[[0,0],[w,0],[w,h],[0,h]];if(scanRotation===1)dest=[[w,0],[w,h],[0,h],[0,0]];else if(scanRotation===2)dest=[[w,h],[0,h],[0,0],[w,0]];else if(scanRotation===3)dest=[[0,h],[0,0],[w,0],[w,h]];affineTriangle(ctx,[tl,tr,br],[dest[0],dest[1],dest[2]]);affineTriangle(ctx,[tl,br,bl],[dest[0],dest[2],dest[3]])}
+function moveScannerCorner(e){const i=Number(e.target.dataset.corner);if(!Number.isInteger(i))return;const svg=scanEl('scannerGuides'),pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const q=pt.matrixTransform(svg.getScreenCTM().inverse());scanCorners[i]=[Math.max(0,Math.min(scanSourceImage.width,q.x)),Math.max(0,Math.min(scanSourceImage.height,q.y))];const poly=svg.querySelector('polygon');poly.setAttribute('points',scanCorners.map(p=>p.join(',')).join(' '));svg.querySelectorAll('circle').forEach((n,k)=>{n.setAttribute('cx',scanCorners[k][0]);n.setAttribute('cy',scanCorners[k][1])});clearTimeout(scanPreviewTimer);scanPreviewTimer=setTimeout(renderScannerCrop,120)}
+function closeScanner(){stopScannerCamera();scanEl('scannerOverlay').classList.remove('open');scanSourceImage=null}
+function openScannerFile(file){if(!file)return;const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;c.getContext('2d').drawImage(img,0,0);URL.revokeObjectURL(url);scanSourceImage=c;scanCorners=detectStillCorners(c);scanRotation=0;if(!scanCorners)scanCorners=[[0,0],[c.width,0],[c.width,c.height],[0,c.height]];showScannerReview();if(scanEl('scannerStatus'))scanEl('scannerStatus').textContent='Ajuste os cantos verdes se necessário e gire a imagem para deixar o texto na horizontal antes de enviar ao OCR.'};img.onerror=()=>{URL.revokeObjectURL(url);notify('Não foi possível abrir esta imagem')};img.src=url}
+function detectStillCorners(c){try{const w=320,h=Math.round(320*c.height/c.width),tmp=document.createElement('canvas');tmp.width=w;tmp.height=h;const ctx=tmp.getContext('2d',{willReadFrequently:true});ctx.drawImage(c,0,0,w,h);const d=ctx.getImageData(0,0,w,h).data;let pts=[];for(let y=2;y<h-2;y+=2)for(let x=2;x<w-2;x+=2){const k=(y*w+x)*4,L=(d[k]+d[k+1]+d[k+2])/3,S=Math.max(d[k],d[k+1],d[k+2])-Math.min(d[k],d[k+1],d[k+2]);if(L>185&&S<65)pts.push([x,y])}if(pts.length<w*h*.08)return null;const extrema=[pts.reduce((a,p)=>p[0]+p[1]<a[0]+a[1]?p:a),pts.reduce((a,p)=>p[0]-p[1]>a[0]-a[1]?p:a),pts.reduce((a,p)=>p[0]+p[1]>a[0]+a[1]?p:a),pts.reduce((a,p)=>p[0]-p[1]<a[0]-a[1]?p:a)];return extrema.map(p=>[p[0]*c.width/w,p[1]*c.height/h])}catch{return null}}
+async function useScannerImage(){try{const c=scanEl('scannerOutput');const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.92));if(!blob)throw Error('Não foi possível preparar a imagem');const f=new File([blob],`resumo-digitalizado-${Date.now()}.jpg`,{type:'image/jpeg'});closeScanner();await attachSummary(f)}catch(e){notify(e.message||'Não foi possível usar a imagem digitalizada')}}
+scanEl('scannerClose').onclick=closeScanner;scanEl('scannerOverlay').addEventListener('click',e=>{if(e.target===scanEl('scannerOverlay'))closeScanner()});scanEl('scanSummaryBtn').onclick=openScanner;scanEl('scannerShutter').onclick=()=>{const c=scanLastCorners;if(c)captureScannerFrame(c);else{const v=scanEl('scannerVideo');if(v.videoWidth){const all=[[0,0],[v.videoWidth,0],[v.videoWidth,v.videoHeight],[0,v.videoHeight]];captureScannerFrame(all)}}};scanEl('scannerPickFile').onclick=()=>{const i=scanEl('summaryPhotoInput');i.dataset.fromScanner='1';i.click()};scanEl('summaryPhotoInput').addEventListener('change',e=>{const f=e.target.files?.[0];if(e.target.dataset.fromScanner==='1'&&f){e.target.dataset.fromScanner='';stopScannerCamera();openScannerFile(f)}else if(f)attachSummary(f)});scanEl('scannerGuides').addEventListener('pointerdown',e=>{if(e.target.matches('[data-corner]')){e.target.setPointerCapture(e.pointerId);e.target.dataset.dragging='1'}});scanEl('scannerGuides').addEventListener('pointermove',e=>{if(e.target.dataset.dragging==='1')moveScannerCorner(e)});scanEl('scannerGuides').addEventListener('pointerup',e=>{if(e.target.dataset.dragging==='1'){e.target.dataset.dragging='';renderScannerCrop()}});scanEl('scannerRotateLeft').onclick=()=>{scanRotation=(scanRotation+3)%4;renderScannerCrop()};scanEl('scannerRotateRight').onclick=()=>{scanRotation=(scanRotation+1)%4;renderScannerCrop()};scanEl('scannerRetake').onclick=()=>{scanSourceImage=null;scanCorners=null;openScanner()};scanEl('scannerUsePhoto').onclick=useScannerImage;
+
 wirePermanentBases();
 loadSaved();renderCatalog();render();renderCatalogViews();
 renderFinance();
 </script>
+
+<div class="scanner-overlay" id="scannerOverlay" role="dialog" aria-modal="true" aria-labelledby="scannerTitle">
+ <section class="scanner-modal"><header class="scanner-head"><h2 id="scannerTitle">Scanner do resumo</h2><button class="iconbtn" id="scannerClose" type="button" aria-label="Fechar scanner">Fechar ×</button></header>
+  <div class="scanner-body"><div class="scanner-stage" id="scannerStage">
+   <video id="scannerVideo" autoplay playsinline muted></video><img id="scannerStill" alt="Resumo capturado" hidden><canvas id="scannerOutput" class="scanner-preview" hidden></canvas>
+   <svg id="scannerGuides" aria-label="Ajuste os cantos do documento" hidden></svg><div class="scan-guide" id="scannerGuide"></div>
+  </div><div class="scanner-status" id="scannerStatus">Posicione a folha inteira dentro da área. A captura acontece quando ela estiver enquadrada e estável.</div>
+  <div class="scanner-controls" id="scannerLiveControls"><button class="scan-shutter" id="scannerShutter" type="button" aria-label="Capturar agora" title="Capturar agora"></button><button class="btn" id="scannerPickFile" type="button">Escolher imagem</button></div>
+  <div class="scanner-controls" id="scannerEditControls" hidden><button class="btn" id="scannerRotateLeft" type="button">↶ Girar</button><button class="btn" id="scannerRotateRight" type="button">↷ Girar</button><button class="btn" id="scannerRetake" type="button">Refazer</button><button class="btn primary" id="scannerUsePhoto" type="button">Usar imagem e ler OCR</button></div>
+  <p class="scanner-tip" id="scannerTip">A detecção e a captura automática dependem de boa iluminação e contraste. Você também pode capturar manualmente.</p>
+ </div></section>
+</div>
+
 </body></html>
