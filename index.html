@@ -183,12 +183,86 @@ body{background:var(--bg);color:var(--ink)}
 #toast.toast.show.success{background:#176b53;color:#fff;border:1px solid #0e573f;font-weight:800;box-shadow:0 8px 28px #0e573f55}
 #toast.toast.show.error{background:#a83232;color:#fff;border:1px solid #812424;font-weight:800}
 </style>
+
+<style id="history-consultation-style">
+#historyTab.active{background:#176b53!important;color:#fff!important;border-color:#176b53!important}
+#historyView .catalogToolbar{align-items:center}.history-panel{padding:14px;overflow:hidden}
+.history-filters{display:grid;grid-template-columns:minmax(240px,2fr) repeat(2,minmax(130px,1fr)) repeat(3,minmax(130px,1fr));gap:10px}
+.history-filters .field input{height:38px;border:1px solid var(--line);border-radius:8px;padding:0 10px;font:inherit;min-width:0;width:100%;background:#fff;color:var(--ink)}
+.history-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--line)}
+.history-actions .btn.primary{background:#176b53!important;border-color:#176b53!important}
+.history-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:12px 0}
+.history-metrics>div{padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#f7faf8}
+.history-metrics small{display:block;color:var(--muted);font-size:10px;font-weight:800}
+.history-metrics strong{display:block;margin-top:5px;font-size:18px;color:#176b53;overflow-wrap:anywhere}
+.history-groups{display:grid;gap:12px}.history-day{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff}
+.history-day-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 13px;background:#e8f3ec;color:#176b53;font-weight:800}
+.history-day-versions{display:grid;gap:10px;padding:10px}.history-version{border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.history-version-head{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 11px;background:#f6f9f7;font-size:12px;font-weight:800}
+.history-records{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:8px;padding:9px}
+.history-card{min-width:0;border:1px solid #e7ece8;border-radius:9px;padding:11px;background:white}
+.history-card-title{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;margin-bottom:8px}
+.history-card-title strong{font-size:15px;overflow-wrap:anywhere}.history-badge{display:inline-flex;padding:4px 8px;border-radius:999px;background:#e8f5ed;color:#176b53;font-size:10px;font-weight:800;white-space:nowrap}
+.history-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.history-field{min-width:0;padding:7px 8px;border-radius:7px;background:#f7f9f8;border:1px solid #edf1ee}
+.history-field span{display:block;color:var(--muted);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.history-field strong{display:block;margin-top:3px;font-size:11px;line-height:1.35;overflow-wrap:anywhere;white-space:pre-wrap}
+.history-card-actions{display:flex;justify-content:flex-end;margin-top:8px}.history-compare-btn{border-color:#b9d8c4;color:#176b53}
+.history-modal{width:min(100%,760px)}.history-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.history-detail-item{padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fbfcfb;min-width:0}
+.history-detail-item small{display:block;color:var(--muted);font-weight:800;font-size:9px;text-transform:uppercase}
+.history-detail-item div{margin-top:4px;overflow-wrap:anywhere;white-space:pre-wrap;font-size:12px}
+.history-compare-table{width:100%;min-width:0;border-collapse:collapse}.history-compare-table th,.history-compare-table td{padding:9px;border-bottom:1px solid var(--line);text-align:left;font-size:11px;overflow-wrap:anywhere}
+.history-compare-table th{background:#f4f8f5}.history-change{background:#fff8e8}.history-empty{padding:20px;text-align:center;color:var(--muted)}
+@media(max-width:900px){.history-filters{grid-template-columns:repeat(3,minmax(0,1fr))}.history-query{grid-column:span 3}}
+@media(max-width:600px){#historyView{padding:0 12px}.history-panel{padding:10px}.history-filters{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.history-query{grid-column:span 2}.history-actions .btn{flex:1}.history-actions .muted{flex-basis:100%}.history-metrics{grid-template-columns:1fr}.history-day-head,.history-version-head{align-items:flex-start;flex-direction:column}.history-records{grid-template-columns:1fr;padding:7px}.history-detail-grid{grid-template-columns:1fr}.history-modal{padding:15px 12px}.history-compare-table th,.history-compare-table td{padding:7px 5px;font-size:10px}}
+</style>
+<style id="minimal-collapse-summary">
+.scale-list-item{gap:9px}
+.scale-summary-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0}
+.scale-summary-actions .departure-badge{max-width:260px}
+.scale-edit-top{height:34px;padding:0 13px;background:var(--red);color:#fff;border-color:var(--red);font-weight:800;white-space:nowrap}
+.scale-summary-meta{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:8px}
+.scale-summary-meta>div{display:grid;gap:4px;min-width:0;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#f7f8f9}
+.scale-summary-meta strong{font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+.scale-team-inline{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;min-width:0}.scale-team-helper{font-size:11px;line-height:1.35;color:var(--muted);overflow-wrap:anywhere}.scale-team-label{font-size:9px;letter-spacing:.04em;font-weight:800;color:var(--ink)}.scale-team-sep{color:var(--red);font-weight:800}.scale-team-none{font-style:italic}
+.scale-details{border-top:1px solid var(--line);padding-top:8px}
+.scale-details>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;list-style:none;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#f7f8f9;color:var(--ink);font-size:11px;font-weight:800;user-select:none}
+.scale-details>summary::-webkit-details-marker{display:none}
+.scale-details>summary::marker{content:""}
+.scale-details[open]>summary{border-color:var(--red);color:var(--red)}
+.scale-details-chevron{font-size:16px;line-height:10px;transition:transform .18s}
+.scale-details[open] .scale-details-chevron{transform:rotate(180deg)}
+.scale-details-content{display:grid;gap:9px;padding-top:10px}
+@media(max-width:620px){.scale-summary-meta{grid-template-columns:1fr 1fr}.scale-summary-actions{align-items:flex-end;flex-direction:column}.scale-summary-actions .departure-badge{max-width:175px;text-align:center}.scale-list-heading{align-items:flex-start}}
+@media(max-width:380px){.scale-summary-meta{grid-template-columns:1fr}.scale-summary-actions .departure-badge{max-width:150px;font-size:9px}.scale-list-title{font-size:14px}}
+</style>
+
+<style id="corrige-cabecalho-operacional">
+/* Faixa superior: título e ações ocupam colunas estáveis, sem esmagar rótulos. */
+#scaleView .scale-list-heading{display:grid;grid-template-columns:minmax(190px,.75fr) minmax(0,2fr);align-items:center;gap:14px}
+#scaleView .scale-summary-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px;min-width:0;width:100%}
+#scaleView .scale-summary-actions .departure-control{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:7px;min-width:0;width:auto;max-width:100%;margin:0}
+#scaleView .scale-summary-actions .departure-badge{width:auto;max-width:min(260px,100%);flex:0 1 auto;text-align:center}
+#scaleView .scale-summary-actions .departure-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:6px;min-width:0}
+#scaleView .scale-summary-actions .departure-actions .btn,#scaleView .scale-summary-actions .departure-upload{flex:0 0 auto;min-width:0;max-width:100%;white-space:nowrap;line-height:1.25}
+#scaleView .scale-summary-actions .departure-control>.sub{flex:1 0 100%;margin:0;text-align:right}
+#scaleView .scale-edit-top{flex:0 0 auto}
+@media(max-width:900px){#scaleView .scale-list-heading{grid-template-columns:minmax(160px,.65fr) minmax(0,1.35fr);gap:10px}#scaleView .scale-summary-actions{justify-content:flex-start}#scaleView .scale-summary-actions .departure-control{justify-content:flex-start}#scaleView .scale-summary-actions .departure-actions{justify-content:flex-start}}
+@media(max-width:620px){#scaleView .scale-list-heading{display:flex;flex-direction:column;align-items:stretch;gap:10px}#scaleView .scale-summary-actions{justify-content:flex-start;align-items:flex-start}#scaleView .scale-summary-actions .departure-control{width:100%;justify-content:flex-start;align-items:flex-start}#scaleView .scale-summary-actions .departure-badge{max-width:100%;text-align:left}#scaleView .scale-summary-actions .departure-actions{width:100%;justify-content:flex-start}#scaleView .scale-summary-actions .departure-actions .btn,#scaleView .scale-summary-actions .departure-upload{flex:1 1 145px;min-height:38px;white-space:normal}#scaleView .scale-summary-actions .departure-control>.sub{text-align:left}#scaleView .scale-edit-top{margin-left:auto}}
+@media(max-width:390px){#scaleView .scale-summary-actions .departure-actions .btn,#scaleView .scale-summary-actions .departure-upload{flex-basis:100%}}
+</style>
+
+<style id="mantem-acoes-na-mesma-linha">
+@media(min-width:901px){#scaleView .scale-summary-actions{display:grid;grid-template-columns:minmax(0,max-content) minmax(0,1fr) auto;justify-content:stretch;align-items:center}#scaleView .scale-summary-actions .departure-control{display:contents}#scaleView .scale-summary-actions .departure-badge{grid-column:1;grid-row:1}#scaleView .scale-summary-actions .departure-actions{grid-column:2;grid-row:1}#scaleView .scale-summary-actions .departure-control>.sub{grid-column:1/-1;grid-row:2}#scaleView .scale-summary-actions .scale-edit-top{grid-column:3;grid-row:1;align-self:center}}
+@media(min-width:621px) and (max-width:900px){#scaleView .scale-list-heading{grid-template-columns:minmax(0,1fr)}#scaleView .scale-summary-actions{display:flex}#scaleView .scale-summary-actions .departure-control{display:flex}#scaleView .scale-summary-actions .departure-control>.sub{flex:1 0 100%;grid-column:auto;grid-row:auto}#scaleView .scale-summary-actions .departure-badge,#scaleView .scale-summary-actions .departure-actions,#scaleView .scale-summary-actions .scale-edit-top{grid-column:auto;grid-row:auto}}
+</style>
 </head>
 <body>
 <div class="app">
 <header class="top"><div class="brand"><div class="logo">ST</div><div><b>SR TRANSMARINA</b><small>Operação de entregas</small></div></div><div class="saved" id="saveState">Conectando ao Sheets…</div></header>
 <section class="heading"><div><div class="eyebrow">Operação de entregas</div><h1 id="pageTitle">Planejamento de rotas</h1><p id="pageDescription">Edite a escala, organize equipes e acompanhe as cargas.</p></div><div class="datebox" id="todayLabel"></div></section>
-<nav class="mainnav" aria-label="Navegação principal"><button class="navtab active" id="scaleTab" type="button">Escala</button><button class="navtab" id="catalogTab" type="button">Cadastros</button><button class="navtab" id="financeTab" type="button">Financeiro</button></nav>
+<nav class="mainnav" aria-label="Navegação principal"><button class="navtab active" id="scaleTab" type="button">Escala</button><button class="navtab" id="catalogTab" type="button">Cadastros</button><button class="navtab" id="financeTab" type="button">Financeiro</button><button class="navtab" id="historyTab" type="button">Histórico</button></nav>
 <div id="scaleView">
 <section class="stats"><div class="stat"><div class="statlabel">Registros na escala</div><div class="statvalue" id="totalCount">0</div></div><div class="stat"><div class="statlabel">Cargas</div><div class="statvalue" id="loadCount">0</div></div><div class="stat"><div class="statlabel">Pessoas escaladas</div><div class="statvalue" id="teamCount">0</div></div><div class="stat"><div class="statlabel">Pendentes</div><div class="statvalue green" id="pendingCount">0</div></div></section>
 <section class="toolbar"><div class="search"><input id="search" placeholder="Buscar motorista, rota, carga…" aria-label="Buscar na escala"></div><select class="select" id="statusFilter"><option value="">Todos os status</option><option>EM ENTREGA</option><option>PENDENTE</option><option>CONFIRMADA</option><option>AGUARDANDO</option></select><input class="select" id="dateFilter" type="date" aria-label="Filtrar por data"><details class="xls-menu" id="xlsMenu"><summary class="btn primary" aria-label="Abrir menu de importação e geração XLS">GERAR XLS ▾</summary><div class="xls-dropdown"><button class="btn" type="button" id="sourceImportBtn">Importar fechamento sem BOX</button><input class="hidden" type="file" id="sourceExcelInput" accept=".xlsx,.xlsm,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroEnabled.12"><button class="btn" type="button" id="boxImportBtn">Importar fechamento com BOX</button><input class="hidden" type="file" id="boxExcelInput" accept=".xlsx,.xlsm,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroEnabled.12"><button class="btn" type="button" id="importBtn">Importar CSV</button><input class="hidden" type="file" id="csvInput" accept=".csv,text/csv"><div class="menu-separator"></div><button class="btn" type="button" id="exportBtn">Gerar XLS da escala</button></div></details><button class="btn" id="catalogImportBtn">⇧ Importar cadastros</button><button class="btn" id="syncSheetsBtn" type="button">↻ Atualizar base do Sheets</button><button class="btn" id="savePreviewBtn" type="button">Salvar PRÉVIA</button><button class="btn primary" id="confirmDefinitiveBtn" type="button">Confirmar DEFINITIVA</button><input class="hidden" type="file" id="catalogInput" accept=".xlsx,.xlsm,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroEnabled.12"><button class="btn" id="collectionBtn">＋ Lançar STD ONLINE</button><button class="btn" id="shareScaleBtn" type="button">Compartilhar escala</button><button class="btn primary" id="newBtn">＋ Novo registro</button><button class="btn danger" id="clearScaleBtn" title="Apagar todos os registros da escala e coletas vinculadas">Limpar escala</button></section>
@@ -211,6 +285,25 @@ body{background:var(--bg);color:var(--ink)}
 <div class="notice"><strong>Importante:</strong> a foto é processada neste aparelho com leitura OCR para apoiar a revisão; confira e complete os campos de cada entrega antes de salvar. Os dados e tarifas ficam salvos localmente neste navegador.</div>
 </div>
 </div>
+<div id="historyView" class="hidden">
+  <section class="catalogIntro"><div class="catalogToolbar"><div><h2>Histórico de cargas</h2><p>Consulta somente leitura das versões definitivas registradas nas abas de histórico do Google Sheets.</p></div><button class="btn" id="historyRefreshBtn" type="button">↻ Consultar histórico</button></div></section>
+  <section class="panel history-panel">
+    <div class="history-filters">
+      <div class="field history-query"><label for="historyQuery">Buscar carga, motorista, NF, coleta ou placa</label><input id="historyQuery" type="search" placeholder="Digite um número, nome, NF, coleta ou placa"></div>
+      <div class="field"><label for="historyFrom">Data de</label><input id="historyFrom" type="date"></div>
+      <div class="field"><label for="historyTo">Até</label><input id="historyTo" type="date"></div>
+      <div class="field"><label for="historyRegion">Região</label><input id="historyRegion" placeholder="Código ou nome"></div>
+      <div class="field"><label for="historyRoute">Rota</label><input id="historyRoute" placeholder="Rota"></div>
+      <div class="field"><label for="historyVersion">Versão</label><input id="historyVersion" inputmode="numeric" placeholder="Ex.: 2"></div>
+    </div>
+    <div class="history-actions"><button class="btn primary" id="historySearchBtn" type="button">Filtrar histórico</button><button class="btn" id="historyClearBtn" type="button">Limpar filtros</button><button class="btn" id="historyExportBtn" type="button" disabled>Exportar para Excel</button><span class="muted" id="historyStatus" aria-live="polite">Use “Consultar histórico” para carregar os registros.</span></div>
+    <div class="history-metrics"><div><small>CARGAS ENCONTRADAS</small><strong id="historyLoadCount">0</strong></div><div><small>DIAS / VERSÕES</small><strong id="historyVersionCount">0</strong></div><div><small>SOMA DE TARIFAS REGISTRADAS</small><strong id="historyTariffTotal">—</strong></div></div>
+    <div id="historyResults" class="history-groups" aria-live="polite"><div class="empty"><strong>Histórico ainda não carregado</strong>Consulte o Apps Script para ver as versões definitivas.</div></div>
+  </section>
+  <div class="notice"><strong>Somente consulta:</strong> esta tela não altera nem exclui o histórico. Os resultados vêm de HISTORICO_CARGAS e são complementados por HISTORICO_DEFINITIVAS.</div>
+</div>
+<div class="overlay" id="historyOverlay" role="dialog" aria-modal="true" aria-labelledby="historyModalTitle"><div class="modal history-modal"><div class="modalhead"><h2 id="historyModalTitle">Detalhes do histórico</h2><button class="close" id="historyModalClose" type="button" aria-label="Fechar">×</button></div><div id="historyModalBody"></div><div class="modalactions"><span class="muted">Registro imutável · somente leitura</span><button class="btn" id="historyModalDone" type="button">Fechar</button></div></div></div>
+
 <div class="overlay" id="summaryScannerOverlay" aria-hidden="true"><div class="modal scanner-modal"><div class="modalhead"><h2>Digitalizar resumo</h2><button class="close" id="closeSummaryScanner" type="button" aria-label="Fechar">×</button></div><p class="help">Enquadre a folha na câmera. Se a câmera não iniciar, permita o acesso ou use a câmera do aparelho.</p><div class="scanner-preview"><video id="summaryCameraVideo" autoplay playsinline muted></video><div id="cameraMessage" class="camera-message">Iniciando câmera…</div></div><div class="modalactions scanner-actions"><button type="button" class="btn" id="scannerFallbackBtn">Usar câmera do aparelho</button><div><button type="button" class="btn" id="cancelSummaryScanner">Cancelar</button><button type="button" class="btn primary" id="captureSummaryBtn" disabled>Capturar foto</button></div></div></div></div>
 <div class="overlay" id="overlay"><div class="modal"><div class="modalhead"><h2 id="modalTitle">Novo registro da escala</h2><button class="close" id="closeModal" aria-label="Fechar">×</button></div><p class="help">Preencha os campos correspondentes à aba “FAZER ESCALA AQUI”. Campos de documentos pessoais não são incluídos.</p><form id="recordForm"><div class="formgrid">
 <div class="field"><label for="box">BOX</label><input id="box" autocomplete="off"></div><div class="field"><label for="driver">MOTORISTA</label><input id="driver" list="driverOptions" autocomplete="off"><datalist id="driverOptions"></datalist></div><div class="field"><label for="vehicle">VEÍCULO / PLACA</label><input id="vehicle" list="vehicleOptions" autocomplete="off"><datalist id="vehicleOptions"></datalist></div><div class="field"><label for="helper1">AJUDANTE 1</label><input id="helper1" list="helperOptions" autocomplete="off"><datalist id="helperOptions"></datalist></div><div class="field"><label for="helper2">AJUDANTE 2</label><input id="helper2" list="helperOptions" autocomplete="off"></div><div class="field"><label for="load">CARGA</label><input id="load" autocomplete="off"></div><div class="field"><label for="status">STATUS</label><select id="status"><option value="">Selecione</option><option>EM ENTREGA</option><option>PENDENTE</option><option>CONFIRMADA</option><option>AGUARDANDO</option><option>FINALIZADA</option></select></div><div class="field"><label for="std">STD ONLINE</label><input id="std" autocomplete="off"></div><div class="field"><label for="collect">COLETA (opcional)</label><input id="collect" autocomplete="off"></div><div class="field"><label for="route">ROTA</label><input id="route" placeholder="Ex.: MG 260" autocomplete="off"></div><div class="field"><label for="qty">QTD P</label><input id="qty" type="number" min="0" step="1"></div><div class="field"><label for="cub">CUB</label><input id="cub" inputmode="decimal" placeholder="Ex.: 9,5"></div><div class="field"><label for="route2">REGIÃO</label><input id="route2" placeholder="Nome da região" autocomplete="off"></div><div class="field"><label for="routeCode">CÓD. REGIÃO</label><input id="routeCode" placeholder="Ex.: 96" inputmode="numeric" autocomplete="off"></div><div class="field"><label for="date">DATA</label><input id="date" type="date"></div><div class="field"><label for="transpo">TRANSPO</label><input id="transpo" autocomplete="off"></div><div class="field"><label for="period">PERÍODO</label><input id="period" placeholder="Ex.: manhã / tarde" autocomplete="off"></div><div class="field"><label for="stopped">MOTORISTAS PARADOS</label><input id="stopped" autocomplete="off"></div><div class="field wide"><label for="reason">MOTIVO</label><input id="reason" autocomplete="off"></div>
@@ -231,7 +324,7 @@ const REGION_ROUTE_MGM_BASE=[{"regionCode":"58","regionName":"UBA_D2","route":"M
 const fields=['box','driver','vehicle','helper1','helper2','load','status','std','collect','route','qty','cub','route2','routeCode','date','transpo','stopped','reason','period'];
 const headers=['BOX','MOTORISTA','VEICULO/PLACA','AJUDANTE1','AJUDANTE 2','CARGA','STATUS','STD','COLETA','ROTA','QTD P','CUB','ROTA2','COD REGIAO','DATA','TRANSPO','MOTORISTAS PARADOS','MOTIVO','PERIODO'];
 let records=[];let editingId=null;let toastTimer;
-const el=id=>{const e=document.getElementById(id);return e||document.createElement('div');};const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const el=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function localISO(){const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
 function loadSaved(){try{const d=JSON.parse(localStorage.getItem(STORAGE)||'[]');records=Array.isArray(d)?d:[]}catch{records=[]}try{const c=JSON.parse(localStorage.getItem(COLLECTION_STORAGE)||'[]');collections=Array.isArray(c)?c:[]}catch{collections=[]}try{const saved=JSON.parse(localStorage.getItem(CATALOG_STORAGE)||'null');if(saved&&Array.isArray(saved.drivers)&&Array.isArray(saved.vehicles))catalog={drivers:saved.drivers,helpers:Array.isArray(saved.helpers)?saved.helpers:[],vehicles:saved.vehicles}}catch{}}
 function save(){try{localStorage.setItem(STORAGE,JSON.stringify(records));localStorage.setItem(COLLECTION_STORAGE,JSON.stringify(collections));localStorage.setItem(CATALOG_STORAGE,JSON.stringify(catalog));el('saveState').textContent='Cópia local atualizada';return true}catch{el('saveState').textContent='Não foi possível salvar';notify('Armazenamento indisponível neste navegador');return false}}
@@ -277,7 +370,7 @@ async function syncFromSheets() {
         std:r.STD||r['STD ONLINE']||'', collect:r.COLETA||'', route:r.ROTA||'', qty:r['QTD P']||'', cub:r.CUB||'',
         route2:r['ROTA2 / REGIAO']||r.ROTA2||r.REGIAO||'', routeCode:r['COD REGIAO']||r['COD. REGIAO']||'',
         date:dateValue(r.DATA_OPERACAO||r.DATA), transpo:r.TRANSPO||r.TRANSPORTADORA||'',
-        stopped:r['MOTORISTAS PARADOS']||'', reason:r.MOTIVO||'', period:r.PERIODO||r['PERÍODO']||'', imageStatus:r.STATUS_IMAGEM||'', departureSheet:r.URL_FOLHA_CARGA||r.departureSheet||'', departureAt:r.SAIDA_CD||'', departureBy:r.RESPONSAVEL_SAIDA_CD||'', releaseStatus:r.COLETA_LIBERADA||'', releaseAt:r.LIBERACAO_EM||'', releaseBy:r.LIBERADO_POR||''
+        stopped:r['MOTORISTAS PARADOS']||'', reason:r.MOTIVO||'', period:r.PERIODO||r['PERÍODO']||'', imageStatus:r.STATUS_IMAGEM||'', departureAt:r.SAIDA_CD||'', departureBy:r.RESPONSAVEL_SAIDA_CD||'', releaseStatus:r.COLETA_LIBERADA||'', releaseAt:r.LIBERACAO_EM||'', releaseBy:r.LIBERADO_POR||''
       })).filter(r=>r.load||r.driver||r.box);
     }
     save(); renderCatalog(); render(); renderCatalogViews();
@@ -321,7 +414,6 @@ function prepareScaleRows(items){
       load:r.load||'',status:r.status||'',std:r.std||'',collect:r.collect||'',route:r.route||'',qty:r.qty||'',cub:r.cub||'',
       route2:r.route2||'',routeCode:r.routeCode||'',date:r.date||date,transpo:r.transpo||'',stopped:r.stopped||'',
       reason:r.reason||'',period:r.period||'',
-      departureSheet:r.departureSheet||'',
       imageStatus:r.departureSheet?'IMAGEM ANEXADA':(r.imageStatus||'SEM IMAGEM'),
       departureAt:r.cdDeparture?.at||r.departureAt||'',departureBy:r.cdDeparture?.by||r.departureBy||'',
       releaseStatus:r.collectionRelease?'COLETA LIBERADA':(r.releaseStatus||''),
@@ -392,6 +484,14 @@ function collectionCount(load){return collections.filter(c=>normCell(c.load)===n
 function collectionSummary(load){return collections.filter(c=>normCell(c.load)===normCell(load)).flatMap(c=>c.items||[]).map(i=>[i.nf&&`NF ${i.nf}`,i.std&&`STD ${i.std}`,i.customer,i.cep&&`CEP ${i.cep}`,i.microzone&&`Microzona ${i.microzone}`].filter(Boolean).join(' · ')).filter(Boolean).map(esc).join('<br>')}
 function routeLabel(r){const route=String(r.route||'').trim().replace(/\s+/g,' '),name=String(r.route2||'').trim(),code=String(r.routeCode||'').trim();if(code&&name)return `${code} - ${name}${route?` (${route})`:''}`;if(name)return `${name}${route?` (${route})`:''}`;return route||'—'}
 function summaryImageStatus(load){const d=chargeData(load||'');if(!d.photo)return{text:'Resumo pendente',detail:'Imagem ainda não anexada',className:'summary-missing'};if(Array.isArray(d.draftDeliveries))return{text:'Imagem anexada',detail:'Revisão pendente no Financeiro',className:'summary-review'};if((d.deliveries||[]).length)return{text:'Conferido no Financeiro',detail:`${d.deliveries.length} entrega(s) confirmada(s)`,className:'summary-confirmed'};return{text:'Imagem anexada',detail:'Confira os dados no Financeiro',className:'summary-review'}}
+function operationalStatus(r){
+ const hasDriver=!!String(r.driver||'').trim();
+ if(!hasDriver)return{label:'MOTORISTA NÃO ALOCADO',tone:'dep-red'};
+ if(r.collectionRelease)return{label:'COLETA LIBERADA',tone:'dep-green'};
+ if(r.cdDeparture)return{label:'SAÍDA CONFIRMADA · AGUARDANDO LIBERAÇÃO',tone:'dep-green'};
+ if(r.departureSheet)return{label:'FOLHA ANEXADA · SAÍDA PENDENTE',tone:'dep-orange'};
+ return{label:'EM CARREGAMENTO',tone:'dep-orange'};
+}
 function render(){
  const list=filtered();
  const displayFields=[
@@ -402,17 +502,21 @@ function render(){
  el('rows').innerHTML=list.length?list.map(r=>{
   const linked=collections.filter(c=>normCell(c.load)===normCell(r.load));
   const image=summaryImageStatus(r.load);
+  const helperNames=[r.helper1,r.helper2].map(x=>String(x||'').trim()).filter(Boolean);
   const fieldsHtml=displayFields.map(([key,label])=>{
    const value=key==='date'?formatDate(r.date):(r[key]||'—');
    return `<div class="scale-list-field"><span class="scale-field-label">${label}</span><strong>${esc(value)}</strong></div>`
   }).join('');
+  const op=operationalStatus(r);
   return `<article class="scale-list-item">
-   <header class="scale-list-heading"><div><span class="scale-kicker">REGISTRO DA ESCALA</span><strong class="scale-list-title">${esc(r.load||'Carga não informada')} · BOX ${esc(r.box||'—')}</strong></div><div class="scale-card-status">${statusTag(r.status)}</div></header>
-   <div class="scale-list-fields">${fieldsHtml}</div>
-   <section class="scale-card-section summary-state ${image.className}"><div><span class="scale-field-label">IMAGEM DO RESUMO</span><strong>${image.text}</strong><span class="scale-field-sub">${image.detail}</span></div><button type="button" class="btn summary-open-finance" data-open-finance="${esc(r.load||'')}">Abrir Financeiro</button></section>
-   <section class="scale-card-section departure-section"><span class="scale-field-label">SAÍDA E COLETA</span>${departureControls(r)}</section>
-   <section class="scale-card-section collection-section"><div class="collection-summary"><span class="scale-field-label">COLETAS VINCULADAS</span><strong>${collectionCount(r.load)} nota(s)</strong><span class="scale-field-sub">STD ONLINE: ${esc(r.std||'—')}</span></div><button class="btn" type="button" data-view-collections="${esc(r.load)}">${linked.length?`Ver/editar coletas (${linked.length})`:'＋ Lançar coleta'}</button></section>
-   <footer class="scale-card-footer"><button class="iconbtn" type="button" data-edit="${esc(r.id)}" aria-label="Editar registro">Editar</button></footer>
+   <header class="scale-list-heading"><div><span class="scale-kicker">REGISTRO DA ESCALA</span><strong class="scale-list-title">${esc(r.load||'Carga não informada')} · BOX ${esc(r.box||'—')}</strong></div><div class="scale-summary-actions">${departureControls(r)}<button class="iconbtn scale-edit-top" type="button" data-edit="${esc(r.id)}" aria-label="Editar carga ${esc(r.load||'')}">Editar</button></div></header>
+   <div class="scale-summary-meta"><div><span class="scale-field-label">MOTORISTA E AJUDANTE(S)</span><div class="scale-team-inline"><strong>${esc(r.driver||'MOTORISTA NÃO ALOCADO')}</strong>${helperNames.length?`<span class="scale-team-sep" aria-hidden="true">·</span><span class="scale-team-helper"><span class="scale-team-label">AJUDANTE${helperNames.length>1?'S':''}:</span> ${helperNames.map(esc).join(' · ')}</span>`:`<span class="scale-team-helper scale-team-none">SEM AJUDANTE ALOCADO</span>`}</div></div><div><span class="scale-field-label">CÓD. REGIÃO + REGIÃO</span><strong>${esc(routeLabel(r))}</strong></div></div>
+   <details class="scale-details"><summary><span>Ver detalhes e ações</span><span class="scale-details-chevron" aria-hidden="true">⌄</span></summary><div class="scale-details-content">
+    <div class="scale-list-fields">${fieldsHtml}</div>
+    <section class="scale-card-section summary-state ${image.className}"><div><span class="scale-field-label">IMAGEM DO RESUMO</span><strong>${image.text}</strong><span class="scale-field-sub">${image.detail}</span></div><button type="button" class="btn summary-open-finance" data-open-finance="${esc(r.load||'')}">Abrir Financeiro</button></section>
+    
+    <section class="scale-card-section collection-section"><div class="collection-summary"><span class="scale-field-label">COLETAS VINCULADAS</span><strong>${collectionCount(r.load)} nota(s)</strong><span class="scale-field-sub">STD ONLINE: ${esc(r.std||'—')}</span></div><button class="btn" type="button" data-view-collections="${esc(r.load||'')}">${linked.length?`Ver/editar coletas (${linked.length})`:'＋ Lançar coleta'}</button></section>
+   </div></details>
   </article>`
  }).join(''):`<div class="empty"><strong>${records.length?'Nenhum resultado para os filtros':'A escala está vazia'}</strong>${records.length?'Tente alterar a busca ou os filtros.':'Use “Novo registro” para começar ou importe um CSV.'}</div>`;
  el('totalCount').textContent=records.length;el('loadCount').textContent=records.filter(r=>r.load).length;el('teamCount').textContent=records.filter(r=>r.driver||r.helper1||r.helper2).length;el('pendingCount').textContent=records.filter(r=>['PENDENTE','AGUARDANDO'].includes((r.status||'').toUpperCase())).length;el('resultCount').textContent=`${list.length} ${list.length===1?'registro':'registros'}`;el('footCount').textContent=`Exibindo ${list.length} de ${records.length} registros`;refreshDriverAllocations();
@@ -483,70 +587,9 @@ function chargeData(load){const key=chargeKey(load);if(!financeData.charges[key]
 function driverCatalogEntry(name){return (catalog.drivers||[]).find(d=>normCell(catalogName(d))===normCell(name))||null}
 function normalizeWhatsApp(value){let n=String(value||'').replace(/\D/g,'');if(n.length===10||n.length===11)n='55'+n;return n.length>=12&&n.length<=13?n:''}
 function departureControls(r){const hasDriver=!!String(r.driver||'').trim(),sheet=!!r.departureSheet,confirmed=!!r.cdDeparture,authorized=!!r.collectionRelease;let status,cls;if(!hasDriver){status='MOTORISTA NÃO ALOCADO · SAÍDA NÃO LIBERADA';cls='dep-red'}else if(authorized){status='COLETA LIBERADA · AVISO PREPARADO NO WHATSAPP';cls='dep-green'}else if(confirmed){status='SAÍDA DO CD CONFIRMADA · AGUARDANDO GESTOR';cls='dep-green'}else if(sheet){status='FOLHA DE CARGA ANEXADA · CONFIRME A SAÍDA';cls='dep-orange'}else{status='MOTORISTA ALOCADO · AGUARDANDO FOLHA DE CARGA';cls='dep-orange'}const photo=sheet?`<button type="button" class="btn" data-view-departure-sheet="${esc(r.id)}">Ver folha de carga</button>`:'';const upload=hasDriver?`<label class="btn departure-upload">${sheet?'Substituir folha':'Anexar folha de carga'}<input type="file" accept="image/*" data-upload-departure-sheet="${esc(r.id)}" aria-label="Anexar folha de carga para ${esc(r.driver)}"></label>`:`<button type="button" class="btn" disabled title="Alocar um motorista para habilitar">Anexar folha de carga</button>`;let action='';if(hasDriver&&sheet&&!confirmed)action=`<button type="button" class="btn primary" data-confirm-cd-departure="${esc(r.id)}">Confirmar saída do CD</button>`;if(hasDriver&&confirmed&&!authorized)action=`<button type="button" class="btn primary" data-release-collection="${esc(r.id)}">Liberar coleta e avisar motorista</button>`;const time=authorized&&r.collectionRelease?.at?`<div class="sub">Autorizada às ${esc(new Date(r.collectionRelease.at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}))}. Confirme o envio no WhatsApp.</div>`:confirmed&&r.cdDeparture?.at?`<div class="sub">Saída registrada às ${esc(new Date(r.cdDeparture.at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}))}${r.cdDeparture.by?` · ${esc(r.cdDeparture.by)}`:''}</div>`:'';return `<div class="departure-control"><span class="departure-badge ${cls}">${esc(status)}</span><div class="departure-actions">${upload}${photo}${action}</div>${time}</div>`}
-async function uploadDepartureSheet(id,file){
-  if(!file)return;
-  const r=records.find(x=>String(x.id)===String(id));
-  if(!r)return;
-  if(!String(r.driver||'').trim()){
-    notify('Alocar um motorista antes de anexar a folha de carga');
-    return;
-  }
-  if(!file.type||!file.type.startsWith('image/')){
-    notify('Selecione uma imagem válida da folha de carga');
-    return;
-  }
-  notify('A enviar folha de carga para o Google Drive…');
-  try{
-    const previous=r.departureSheet;
-    const base64Img=await compressDepartureSheet(file);
-    r.departureSheet=base64Img;
-    r.cdDeparture=null;
-    r.collectionRelease=null;
-    save();
-    render();
-
-    // Envia ao Google Apps Script para salvar no Google Drive
-    const result=await postToSheets({
-      action:'salvar_folha_carga',
-      carga:r.load||'SEM_CARGA',
-      data:r.date||r.dateOperation||localISO(),
-      motorista:r.driver||'',
-      imagemBase64:base64Img
-    });
-
-    if(result && result.url){
-      r.departureSheet=result.url;
-      save();
-      render();
-      await saveScaleOnline(records);
-      notify('✔ Folha de carga guardada no Google Drive e partilhada com todos!','success');
-    } else {
-      notify('A folha ficou guardada neste aparelho; verifique a ligação ao Sheets.');
-    }
-  }catch(e){
-    notify('Erro ao enviar imagem: ' + (e.message||'tente novamente'));
-  }
-}
+async function uploadDepartureSheet(id,file){if(!file)return;const r=records.find(x=>x.id===id);if(!r)return;if(!String(r.driver||'').trim()){notify('Alocar um motorista antes de anexar a folha de carga');return}if(!file.type||!file.type.startsWith('image/')){notify('Selecione uma imagem válida da folha de carga');return}try{const previous=r.departureSheet;r.departureSheet=await compressDepartureSheet(file);r.cdDeparture=null;r.collectionRelease=null;if(!save()){r.departureSheet=previous;return}render();notify('Folha de carga anexada. Confira a imagem e confirme a saída do CD quando o veículo efetivamente sair.')}catch(e){notify(e.message||'Não foi possível anexar a folha de carga')}}
 function compressDepartureSheet(file){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{const scale=Math.min(1,1100/img.width),canvas=document.createElement('canvas');canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.58));URL.revokeObjectURL(img.src)};img.onerror=()=>reject(Error('Não foi possível abrir a imagem da folha de carga.'));img.src=URL.createObjectURL(file)})}
-function viewDepartureSheet(id){
-  const r=records.find(x=>String(x.id)===String(id));
-  if(!r?.departureSheet){
-    notify('Não há folha de carga anexada neste registo');
-    return;
-  }
-  // Se já for link direto do Google Drive ou web
-  if(r.departureSheet.startsWith('http')){
-    window.open(r.departureSheet, '_blank');
-    return;
-  }
-  const win=window.open('','_blank');
-  if(!win){
-    notify('Permita a abertura de nova aba para visualizar a folha de carga');
-    return;
-  }
-  win.document.write(`<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Folha de carga</title><body style="margin:0;background:#16191b;color:white;font:16px system-ui;text-align:center"><header style="padding:12px">Folha de carga · ${esc(r.driver)} · ${esc(r.vehicle||'Veículo não informado')} <button onclick="window.close()">Fechar</button></header><img src="${r.departureSheet}" alt="Folha de carga" style="max-width:100%;max-height:calc(100vh - 60px);object-fit:contain"></body></html>`);
-  win.document.close();
-}
+function viewDepartureSheet(id){const r=records.find(x=>x.id===id);if(!r?.departureSheet){notify('Não há folha de carga anexada neste registro');return}const win=window.open('','_blank');if(!win){notify('Permita a abertura de nova aba para visualizar a folha de carga');return}win.document.write(`<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Folha de carga</title><body style="margin:0;background:#16191b;color:white;font:16px system-ui;text-align:center"><header style="padding:12px">Folha de carga · ${esc(r.driver)} · ${esc(r.vehicle||'Veículo não informado')} <button onclick="window.close()">Fechar</button></header><img src="${r.departureSheet}" alt="Folha de carga" style="max-width:100%;max-height:calc(100vh - 60px);object-fit:contain"></body></html>`);win.document.close()}
 function confirmCDDeparture(id){const r=records.find(x=>x.id===id);if(!r)return;if(!String(r.driver||'').trim())return notify('Alocar um motorista antes de confirmar a saída');if(!r.departureSheet)return notify('Anexe e confira a folha de carga antes de confirmar a saída');const by=prompt('Confirme que o veículo efetivamente saiu do Centro de Distribuição. Informe o responsável pela confirmação:','Gestor da escala');if(by===null)return;r.cdDeparture={at:new Date().toISOString(),by:by.trim()||'Responsável não informado'};r.collectionRelease=null;save();render();notify('Saída do CD registrada. Aguardando liberação da coleta pelo gestor.')}
 function releaseCollection(id){const r=records.find(x=>x.id===id);if(!r)return;if(!r.cdDeparture)return notify('Confirme a saída efetiva do CD antes de liberar a coleta');const driver=driverCatalogEntry(r.driver),phone=normalizeWhatsApp(personValue(driver,'whatsapp'));if(!phone)return notify('Cadastre um WhatsApp válido com DDD no cadastro deste motorista');const region=routeLabel(r);const message=`Olá, ${r.driver}! Sua coleta foi liberada. Hoje você atenderá a região ${region==='—'?'a confirmar':region} e já pode iniciar a coleta pelo aplicativo ASAP. Por favor, faça o login ainda dentro do Centro de Distribuição (CD), antes de iniciar a primeira entrega, e não se esqueça de compartilhar sua localização no grupo. Boa viagem e bom trabalho!`;const url=`https://wa.me/${phone}?text=${encodeURIComponent(message)}`;const tab=window.open(url,'_blank');if(!tab){notify('O navegador bloqueou o WhatsApp. Permita pop-ups e tente novamente.');return}r.collectionRelease={at:new Date().toISOString(),by:'Gestor da escala'};save();render();notify('Coleta liberada. Revise a mensagem e confirme o envio no WhatsApp.')}
 
@@ -602,26 +645,43 @@ function exportRowsCsv(rows,filename){const csv=rows.map(r=>r.map(v=>'"'+String(
 function renderFreightCatalog(){const rows=el('freightRows');if(!rows)return;const q=(el('freightSearch')?.value||'').toLocaleLowerCase('pt-BR'),list=(financeData?.rates||[]).filter(x=>String(x.mgm).toLocaleLowerCase('pt-BR').includes(q));el('freightCount').textContent=`${list.length} tarifas cadastradas`;rows.innerHTML=list.map(x=>`<div class="base-card"><div><strong>${esc(x.mgm)}</strong><small>0–24 paradas: ${money(x.upto24)} · 25–40 paradas: ${money(x.over24)}</small></div><button class="iconbtn" type="button" data-freight-edit="${esc(x.mgm)}">Editar na aba Microzonas</button></div>`).join('')||'<div class="empty">Nenhuma tarifa encontrada.</div>'}
 function wirePermanentBases(){loadStreetEdits();el('manageStreetsBtn').onclick=()=>{el('streetsEditor').classList.toggle('hidden');renderStreetCatalog()};el('cancelStreetBtn').onclick=()=>{el('streetsEditor').classList.add('hidden');resetStreetForm()};el('streetSearch').addEventListener('input',renderStreetCatalog);el('saveStreetBtn').onclick=()=>{const cep=el('streetCep').value.replace(/\D/g,'');const entry={cep,name:el('streetName').value.trim(),district:el('streetDistrict').value.trim(),mgm:el('streetMgm').value.trim().toUpperCase()};if(cep.length!==8||!entry.name){notify('Informe um CEP válido e o logradouro');return}const index=el('saveStreetBtn').dataset.edit;if(index!==''){streetEdits[Number(index)]=entry}else streetEdits.unshift(entry);saveStreetEdits();resetStreetForm();renderStreetCatalog();notify('Alteração local salva; será sincronizada quando o banco online for integrado')};el('streetRows').addEventListener('click',e=>{const edit=e.target.closest('[data-street-edit]'),del=e.target.closest('[data-street-delete]');if(edit){const x=streetEdits[Number(edit.dataset.streetEdit)];el('streetCep').value=x.cep;el('streetName').value=x.name;el('streetDistrict').value=x.district;el('streetMgm').value=x.mgm;el('saveStreetBtn').dataset.edit=edit.dataset.streetEdit;el('saveStreetBtn').textContent='Salvar alteração'}else if(del&&confirm('Excluir esta alteração local? A base integrada original não será alterada.')){streetEdits.splice(Number(del.dataset.streetDelete),1);saveStreetEdits();renderStreetCatalog()}});el('exportStreetsBtn').onclick=()=>exportRowsCsv([['CEP','LOGRADOURO','BAIRRO','MGM'],...streetEdits.map(x=>[x.cep,x.name,x.district,x.mgm])],'alteracoes-logradouros.csv');el('manageFreightBtn').onclick=()=>{el('freightEditor').classList.toggle('hidden');renderFreightCatalog()};el('freightSearch').addEventListener('input',renderFreightCatalog);el('exportFreightBtn').onclick=()=>exportRowsCsv([['MGM','0 A 24 PARADAS','25 A 40 PARADAS'],...(financeData?.rates||[]).map(x=>[x.mgm,x.upto24,x.over24])],'tabela-frete.csv')}
 
-document.addEventListener('DOMContentLoaded', () => {
-  try {
-    wirePermanentBases();
-    loadSaved();
-    renderCatalog();
-    render();
-    renderCatalogViews();
-    renderFinance();
-  } catch (err) {
-    console.error('Erro na renderização inicial:', err);
-  }
+wirePermanentBases();
+loadSaved();renderCatalog();render();renderCatalogViews();
+renderFinance();
+syncFromSheets();
 
-  // Sincroniza em segundo plano sem bloquear os botões locais
-  setTimeout(() => {
-    syncFromSheets().catch(err => {
-      console.warn('Sincronização em background falhou:', err);
-      const saveLabel = el('saveState');
-      if (saveLabel) saveLabel.textContent = 'Modo Local (Offline)';
-    });
-  }, 100);
-});
+// Consulta do histórico definitivo no Apps Script. Não altera registros.
+let historyRows = [];
+let historyWasLoaded = false;
+function historyNorm(value){return String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]/g,'')}
+function historyPick(row, aliases){const map={};Object.keys(row||{}).forEach(k=>map[historyNorm(k)]=row[k]);for(const a of aliases){const k=historyNorm(a);if(Object.prototype.hasOwnProperty.call(map,k)&&map[k]!==''&&map[k]!=null)return map[k]}return ''}
+const HISTORY_FIELDS={date:['DATA_OPERACAO','DATA DA OPERACAO','DATA'],version:['VERSAO','VERSÃO','VERSION'],load:['ID_CARGA','CARGA','NUMERO_CARGA','NÚMERO DA CARGA','Nº CARGA','LOAD'],driver:['MOTORISTA','NOME_MOTORISTA','DRIVER'],helper:['AJUDANTE','AJUDANTE1','AJUDANTE 1','AJUDANTES'],helper2:['AJUDANTE2','AJUDANTE 2'],plate:['VEICULO/PLACA','VEÍCULO/PLACA','VEICULO','VEÍCULO','PLACA','VEHICLE'],region:['REGIAO','REGIÃO','ROTA2 / REGIAO','ROTA2','REGION'],route:['ROTA','ROUTE'],stops:['PARADAS','QTD P','QTD_P','QUANTIDADE PARADAS','STOP_COUNT'],nf:['NFS','NF','NOTAS FISCAIS','NUMERO NF'],collect:['COLETA','STD','STD ONLINE','COLETA_ID','COLETA_LIBERADA'],tariff:['TARIFA','FRETE','VALOR FRETE','VALOR TARIFA'],status:['STATUS_ESCALA','STATUS'],reason:['JUSTIFICATIVA_AJUSTE','JUSTIFICATIVA','MOTIVO DO AJUSTE'],confirmedBy:['CONFIRMADA_POR','CONFIRMADO_POR'],confirmedAt:['CONFIRMADA_EM','CONFIRMADO_EM'],image:['STATUS_IMAGEM','STATUS DA IMAGEM'],departure:['SAIDA_CD','SAÍDA CD','SAIDA DO CD'],release:['COLETA_LIBERADA','STATUS_LIBERACAO','STATUS LIBERAÇÃO']};
+function historyDate(row){let v=historyPick(row,HISTORY_FIELDS.date);if(!v)return '';let s=String(v);let m=s.match(/^(\d{4}-\d{2}-\d{2})/);if(m)return m[1];m=s.match(/^(\d{1,2})[/.\-](\d{1,2})[/.\-](\d{4})$/);return m?`${m[3]}-${String(m[2]).padStart(2,'0')}-${String(m[1]).padStart(2,'0')}`:''}
+function historyDisplayDate(s){return s?new Intl.DateTimeFormat('pt-BR',{timeZone:'UTC',day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(`${s}T12:00:00Z`)):'Data não informada'}
+function historyVersion(row){const v=historyPick(row,HISTORY_FIELDS.version);if(v!=='')return String(v);const id=String(historyPick(row,['ID_ESCALA'])||'');const m=id.match(/-V(\d+)$/i);return m?m[1]:'1'}
+function historyEsc(value){return esc(value==null||value===''?'—':value)}
+function historySearchParams(){const p=new URLSearchParams({action:'historico',ts:String(Date.now())});const values={q:el('historyQuery').value.trim(),from:el('historyFrom').value,to:el('historyTo').value,region:el('historyRegion').value.trim(),route:el('historyRoute').value.trim(),version:el('historyVersion').value.trim()};Object.entries(values).forEach(([k,v])=>{if(v)p.set(k,v)});return p}
+async function loadHistory(){const status=el('historyStatus'),results=el('historyResults'),button=el('historySearchBtn');status.textContent='Consultando as abas de histórico no Google Sheets…';results.innerHTML='<div class="empty"><strong>Carregando histórico</strong>Aguarde a resposta do Apps Script.</div>';button.disabled=true;el('historyRefreshBtn').disabled=true;try{const res=await fetch(`${APPS_SCRIPT_URL}?${historySearchParams().toString()}`,{cache:'no-store'});if(!res.ok)throw Error(`Leitura recusada (${res.status})`);const data=await res.json();if(data.status==='error')throw Error(data.message||'O Apps Script retornou um erro.');if(!Array.isArray(data.historico))throw Error('A resposta não contém a lista do histórico. Atualize o Apps Script com a nova ação de consulta.');historyRows=data.historico;historyWasLoaded=true;renderHistory();status.textContent=`Consulta concluída · ${historyRows.length.toLocaleString('pt-BR')} carga(s) encontrada(s) no histórico.`;el('historyExportBtn').disabled=!historyRows.length;return true}catch(err){historyRows=[];renderHistory();status.textContent=`Falha na consulta: ${err.message||'verifique a implantação do Apps Script'}`;notify(`Histórico não carregado: ${err.message||'verifique o Apps Script'}`,'error');return false}finally{button.disabled=false;el('historyRefreshBtn').disabled=false}}
+function historyMoney(raw){if(raw===''||raw==null)return null;const n=typeof raw==='number'?raw:Number(String(raw).replace(/[^\d,.-]/g,'').replace(/\.(?=\d{3}(?:\D|$))/g,'').replace(',','.'));return Number.isFinite(n)?n:null}
+function renderHistory(){const host=el('historyResults');const groups=new Map();historyRows.forEach((row,index)=>{const date=historyDate(row)||'SEM-DATA',version=historyVersion(row);if(!groups.has(date))groups.set(date,new Map());const versions=groups.get(date);if(!versions.has(version))versions.set(version,[]);versions.get(version).push({row,index})});const sortedDates=[...groups.keys()].sort((a,b)=>b.localeCompare(a));const tariffValues=historyRows.map(r=>historyMoney(historyPick(r,HISTORY_FIELDS.tariff))).filter(v=>v!==null);el('historyLoadCount').textContent=historyRows.length.toLocaleString('pt-BR');el('historyVersionCount').textContent=[...groups.values()].reduce((n,v)=>n+v.size,0).toLocaleString('pt-BR');el('historyTariffTotal').textContent=tariffValues.length?money(tariffValues.reduce((a,b)=>a+b,0)):'—';if(!historyRows.length){host.innerHTML=`<div class="empty"><strong>${historyWasLoaded?'Nenhum resultado encontrado':'Histórico ainda não carregado'}</strong>${historyWasLoaded?'Altere os filtros ou consulte novamente.':'Consulte o Apps Script para carregar os registros definitivos.'}</div>`;return}host.innerHTML=sortedDates.map(date=>{const versions=groups.get(date),verKeys=[...versions.keys()].sort((a,b)=>(Number(a)||0)-(Number(b)||0));const compare=verKeys.length>1?`<button class="btn history-compare-btn" type="button" data-history-compare="${esc(date)}">Comparar V${esc(verKeys[verKeys.length-2])} × V${esc(verKeys[verKeys.length-1])}</button>`:'';return `<section class="history-day"><header class="history-day-head"><span>${historyDisplayDate(date)} · ${[...versions.values()].reduce((n,a)=>n+a.length,0)} carga(s)</span>${compare}</header><div class="history-day-versions">${verKeys.slice().reverse().map(version=>`<section class="history-version"><header class="history-version-head"><span>ESCALA DEFINITIVA · V${historyEsc(version)} · ${versions.get(version).length} carga(s)</span><span>${historyEsc(historyPick(versions.get(version)[0].row,HISTORY_FIELDS.confirmedBy)||'Confirmante não informado')} · ${historyEsc(historyPick(versions.get(version)[0].row,HISTORY_FIELDS.confirmedAt)||'horário não informado')}</span></header><div class="history-records">${versions.get(version).map(({row,index})=>historyCard(row,index)).join('')}</div></section>`).join('')}</div></section>`}).join('')}
+function historyCard(row,index){const load=historyPick(row,HISTORY_FIELDS.load)||historyPick(row,['ID_CARGA','CARGA']);const items=[['MOTORISTA',historyPick(row,HISTORY_FIELDS.driver)],['AJUDANTE',historyPick(row,HISTORY_FIELDS.helper)],['PLACA',historyPick(row,HISTORY_FIELDS.plate)],['REGIÃO / ROTA',[historyPick(row,HISTORY_FIELDS.region),historyPick(row,HISTORY_FIELDS.route)].filter(Boolean).join(' · ')],['PARADAS / NFs',[historyPick(row,HISTORY_FIELDS.stops),historyPick(row,HISTORY_FIELDS.nf)].filter(Boolean).join(' · ')],['COLETA',historyPick(row,HISTORY_FIELDS.collect)],['STATUS',historyPick(row,HISTORY_FIELDS.status)]];return `<article class="history-card"><div class="history-card-title"><strong>CARGA ${historyEsc(load)}</strong><span class="history-badge">V${historyEsc(historyVersion(row))} · DEFINITIVA</span></div><div class="history-fields">${items.map(([label,value])=>`<div class="history-field"><span>${label}</span><strong>${historyEsc(value)}</strong></div>`).join('')}</div><div class="history-card-actions"><button class="btn" type="button" data-history-detail="${index}">Ver detalhes</button></div></article>`}
+function openHistoryModal(title,html){el('historyModalTitle').textContent=title;el('historyModalBody').innerHTML=html;el('historyOverlay').classList.add('open')}
+function closeHistoryModal(){el('historyOverlay').classList.remove('open')}
+function showHistoryDetail(index){const row=historyRows[Number(index)];if(!row)return;const hidden=/CPF|RG|WHATSAPP|TELEFONE|TOKEN|SENHA|CHAVE|BASE64|IMAGEM.*DADOS/i;const entries=Object.entries(row).filter(([k,v])=>!k.startsWith('__')&&!hidden.test(k)&&v!==''&&v!=null);const reason=historyPick(row,HISTORY_FIELDS.reason);const html=`<p class="help">CARGA ${historyEsc(historyPick(row,HISTORY_FIELDS.load))} · ${historyDisplayDate(historyDate(row))} · ESCALA V${historyEsc(historyVersion(row))}</p><div class="history-detail-grid">${entries.map(([k,v])=>`<div class="history-detail-item"><small>${historyEsc(k)}</small><div>${historyEsc(v)}</div></div>`).join('')}</div>${reason?`<div class="notice"><strong>Justificativa da nova versão:</strong> ${historyEsc(reason)}</div>`:''}`;openHistoryModal('Detalhes da carga',html)}
+function compareHistoryVersions(date){const dayRows=historyRows.filter(r=>(historyDate(r)||'SEM-DATA')===date);const versions=[...new Set(dayRows.map(historyVersion))].sort((a,b)=>(Number(a)||0)-(Number(b)||0));if(versions.length<2)return;const oldV=versions[versions.length-2],newV=versions[versions.length-1],oldRows=dayRows.filter(r=>historyVersion(r)===oldV),newRows=dayRows.filter(r=>historyVersion(r)===newV);const loadKey=r=>historyNorm(historyPick(r,HISTORY_FIELDS.load));const oldMap=new Map(oldRows.map(r=>[loadKey(r),r]));const newMap=new Map(newRows.map(r=>[loadKey(r),r]));const changed=[];for(const [key,nr] of newMap){const or=oldMap.get(key);if(!or){changed.push(`<tr><td>Carga ${historyEsc(historyPick(nr,HISTORY_FIELDS.load))}</td><td colspan="3">Adicionada na V${historyEsc(newV)}</td></tr>`);continue}const checks=[['Motorista',HISTORY_FIELDS.driver],['Ajudante',HISTORY_FIELDS.helper],['Placa',HISTORY_FIELDS.plate],['Região',HISTORY_FIELDS.region],['Rota',HISTORY_FIELDS.route],['Paradas',HISTORY_FIELDS.stops],['NFs',HISTORY_FIELDS.nf],['Coleta',HISTORY_FIELDS.collect]];checks.forEach(([label,aliases])=>{const before=String(historyPick(or,aliases)||''),after=String(historyPick(nr,aliases)||'');if(historyNorm(before)!==historyNorm(after))changed.push(`<tr class="history-change"><td>Carga ${historyEsc(historyPick(nr,HISTORY_FIELDS.load))}</td><td>${label}</td><td>${historyEsc(before)}</td><td>${historyEsc(after)}</td></tr>`)})}for(const [key,or] of oldMap)if(!newMap.has(key))changed.push(`<tr><td>Carga ${historyEsc(historyPick(or,HISTORY_FIELDS.load))}</td><td colspan="3">Removida na V${historyEsc(newV)}</td></tr>`);const reason=historyPick(newRows[0]||{},HISTORY_FIELDS.reason);const html=`<p class="help">Comparação de ${historyDisplayDate(date)} · V${historyEsc(oldV)} para V${historyEsc(newV)}. A versão anterior continua preservada.</p>${reason?`<div class="notice"><strong>Justificativa da V${historyEsc(newV)}:</strong> ${historyEsc(reason)}</div>`:''}<div class="tablewrap"><table class="history-compare-table"><thead><tr><th>Carga</th><th>Campo</th><th>Antes · V${historyEsc(oldV)}</th><th>Depois · V${historyEsc(newV)}</th></tr></thead><tbody>${changed.join('')||'<tr><td colspan="4" class="history-empty">Não foi possível identificar diferenças nos campos operacionais retornados.</td></tr>'}</tbody></table></div>`;openHistoryModal('Comparar versões',html)}
+function exportHistoryCsv(){if(!historyRows.length)return notify('Não há resultados para exportar');const keys=[...new Set(historyRows.flatMap(r=>Object.keys(r).filter(k=>!k.startsWith('__'))))];const csv=[keys,...historyRows.map(r=>keys.map(k=>r[k]??''))].map(row=>row.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(';')).join('\r\n');const blob=new Blob(['\ufeff',csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`historico-cargas-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function showHistoryTab(){showMainView('scale');el('scaleView').classList.add('hidden');el('catalogView').classList.add('hidden');el('financeView').classList.add('hidden');el('historyView').classList.remove('hidden');['scaleTab','catalogTab','financeTab'].forEach(id=>el(id).classList.remove('active'));el('historyTab').classList.add('active');el('pageTitle').textContent='Histórico de cargas';el('pageDescription').textContent='Consulte cargas definitivas, versões e registros operacionais.';if(!historyWasLoaded)loadHistory()}
+const showMainViewBeforeHistory=showMainView;
+showMainView=function(view){el('historyView').classList.add('hidden');el('historyTab').classList.remove('active');showMainViewBeforeHistory(view)};
+el('historyTab').addEventListener('click',showHistoryTab);
+el('historySearchBtn').addEventListener('click',loadHistory);
+el('historyRefreshBtn').addEventListener('click',loadHistory);
+el('historyClearBtn').addEventListener('click',()=>{['historyQuery','historyFrom','historyTo','historyRegion','historyRoute','historyVersion'].forEach(id=>el(id).value='');loadHistory()});
+el('historyExportBtn').addEventListener('click',exportHistoryCsv);
+el('historyResults').addEventListener('click',e=>{const detail=e.target.closest('[data-history-detail]'),compare=e.target.closest('[data-history-compare]');if(detail)showHistoryDetail(detail.dataset.historyDetail);else if(compare)compareHistoryVersions(compare.dataset.historyCompare)});
+['historyQuery','historyRegion','historyRoute','historyVersion'].forEach(id=>el(id).addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();loadHistory()}}));
+['historyFrom','historyTo'].forEach(id=>el(id).addEventListener('change',()=>{}));
+el('historyModalClose').addEventListener('click',closeHistoryModal);el('historyModalDone').addEventListener('click',closeHistoryModal);el('historyOverlay').addEventListener('click',e=>{if(e.target===el('historyOverlay'))closeHistoryModal()});
+
 </script>
 </body></html>
