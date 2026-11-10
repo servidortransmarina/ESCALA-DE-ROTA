@@ -359,7 +359,6 @@ async function syncFromSheets() {
       })).filter(x=>x.name);
     }
     normalizePersonLinks();
-    // ESCALA é a fonte oficial: lista vazia também precisa apagar a cópia local antiga.
     if(Array.isArray(data.escala)){
       records=data.escala.map(r=>({
         id:asText(r.ID_REGISTRO||r.ID)||crypto.randomUUID(), idEscala:r.ID_ESCALA||'',
@@ -463,6 +462,45 @@ async function confirmDefinitiveInSheets(){
     save(); render();
     notify(result.already?result.message:`ESCALA DEFINITIVA gravada no histórico: ${result.total||rows.length} cargas.`);
   }catch(err){notify(`Não foi possível confirmar a definitiva: ${err.message||'erro de gravação'}`)}
+}
+
+async function clearScaleProtected(){
+  if(!records.length){
+    notify('A tela não tem cargas para comparar. Atualize a escala pelo Google Sheets antes de limpar.');
+    return;
+  }
+  const button=el('clearScaleBtn');
+  if(button)button.disabled=true;
+  const snapshot=records.map(r=>({...r}));
+  try{
+    if(el('saveState'))el('saveState').textContent='Conferindo se a escala está salva no Sheets…';
+    const check=await postToSheets({action:'verificar_escala_limpeza',registros:prepareScaleRows(snapshot)});
+    if(!check.ready){
+      const detail=check.message||'Os registros da tela não conferem com a aba ESCALA.';
+      notify(`Limpeza bloqueada: ${detail}`);
+      if(el('saveState'))el('saveState').textContent='Conferência falhou; nenhuma linha foi apagada';
+      return;
+    }
+    const total=Number(check.total||snapshot.length);
+    const previas=Number(check.previas||0), definitivas=Number(check.definitivas||0);
+    const warning=`CONFERÊNCIA CONCLUÍDA: ${total} carga(s) da tela conferem com a aba ESCALA do Google Sheets.\n\nANTES DE CONTINUAR, confira se você salvou a PRÉVIA ou confirmou a DEFINITIVA. A limpeza apagará somente os dados ativos da aba ESCALA e a cópia local da escala. O histórico definitivo, cadastros e coletas NÃO serão apagados.\n\nNa base foram identificadas ${previas} PRÉVIA(S) e ${definitivas} DEFINITIVA(S).\n\nDeseja limpar agora?`;
+    if(!confirm(warning)){
+      if(el('saveState'))el('saveState').textContent='Limpeza cancelada; escala mantida';
+      return;
+    }
+    if(el('saveState'))el('saveState').textContent='Limpando somente a aba ESCALA…';
+    // O servidor confere novamente, sob bloqueio, antes de apagar para evitar alteração concorrente.
+    const result=await postToSheets({action:'limpar_escala',confirmar:true,registros:prepareScaleRows(snapshot)});
+    records=[];
+    save();
+    render();
+    closeForm();
+    if(el('saveState'))el('saveState').textContent='Aba ESCALA limpa no Google Sheets';
+    notify(`Escala limpa: ${result.cleared||0} linha(s) removida(s) somente da aba ESCALA. Histórico preservado.`);
+  }catch(err){
+    if(el('saveState'))el('saveState').textContent='Falha na conferência/limpeza; escala mantida';
+    notify(`A escala não foi limpa: ${err.message||'falha na conferência'}`);
+  }finally{if(button)button.disabled=false}
 }
 
 function catalogName(x){return typeof x==='string'?x:(x?.name||'')}
@@ -569,21 +607,7 @@ el('collectionItems').addEventListener('click',e=>{const b=e.target.closest('[da
 function exportCSV(){const data=[headers,...records.map(r=>fields.map(f=>r[f]||''))];const csv=data.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');const url=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='escala-transmarina.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),500);notify('CSV exportado sem dados de documentos')}
 el('todayLabel').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'2-digit',month:'short',year:'numeric'}).format(new Date()).replace(/^./,c=>c.toUpperCase());
 ['search','statusFilter','dateFilter'].forEach(id=>el(id).addEventListener(id==='search'?'input':'change',render));el('shareScaleBtn').onclick=openSharePreview;el('closeShare').onclick=closeSharePreview;el('cancelShare').onclick=closeSharePreview;el('refreshShareBtn').onclick=refreshSharePreview;['shareFolga','shareManutencao','shareDisponiveis','shareFalta'].forEach(id=>el(id).addEventListener('input',()=>{refreshShareDriverReview();refreshDriverAllocations()}));el('downloadShareBtn').onclick=downloadShareImage;el('sendShareBtn').onclick=sendShareMessage;el('shareOverlay').addEventListener('click',e=>{if(e.target===el('shareOverlay'))closeSharePreview()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSharePreview()});el('newBtn').onclick=()=>openForm();el('syncSheetsBtn').onclick=syncFromSheets;el('syncCatalogBtn').onclick=syncFromSheets;el('savePreviewBtn').onclick=savePreviewToSheets;el('confirmDefinitiveBtn').onclick=confirmDefinitiveInSheets;el('rows').addEventListener('change',e=>{const input=e.target.closest('[data-upload-departure-sheet]');if(input){uploadDepartureSheet(input.dataset.uploadDepartureSheet,input.files?.[0]);input.value=''}});
-el('driver').addEventListener('change',()=>{const name=normCell(el('driver').value),driver=(catalog.drivers||[]).find(d=>normCell(catalogName(d))===name);if(driver&&personValue(driver,'active')!=='false'&&personValue(driver,'fixedHelperId')){const helper=(catalog.helpers||[]).find(h=>personId(h)===personValue(driver,'fixedHelperId')&&personValue(h,'active')!=='false');if(helper&&!el('helper1').value)el('helper1').value=catalogName(helper)}});
-async function clearScaleFromSheets(){
-  if(el('clearScaleBtn').disabled)return;
-  if(!confirm(`ATENÇÃO: antes de limpar, confira se a PRÉVIA ou a DEFINITIVA foi salva no Google Sheets. A ação vai apagar somente as linhas de dados da aba ESCALA; o histórico, cadastros e coletas não serão apagados. Deseja continuar para a verificação?`))return;
-  const button=el('clearScaleBtn'),expected=records.map(r=>({id:String(r.id||''),date:String(r.date||''),load:String(r.load||'')}));
-  button.disabled=true;button.textContent='Verificando salvamento…';
-  try{
-    const result=await postToSheets({action:'limpar_escala',confirmacao:'LIMPAR_ESCALA_CONFIRMADO',registrosEsperados:expected});
-    records=[];save();render();closeForm();
-    notify(`Base ESCALA limpa no Google Sheets (${result.deleted||0} registro(s)). Histórico e coletas foram preservados.`,'success');
-  }catch(err){
-    notify(`A escala NÃO foi limpa. ${err.message||'Não foi possível verificar o salvamento no Sheets.'}`,'error');
-  }finally{button.disabled=false;button.textContent='Limpar escala'}
-}
-el('clearScaleBtn').onclick=clearScaleFromSheets;el('sourceImportBtn').onclick=()=>el('sourceExcelInput').click();el('sourceExcelInput').addEventListener('change',e=>{if(e.target.files?.[0])importFirstPass(e.target.files[0])});el('closeModal').onclick=closeForm;el('cancelBtn').onclick=closeForm;el('overlay').addEventListener('click',e=>{if(e.target===el('overlay'))closeForm()});el('importBtn').onclick=()=>el('csvInput').click();el('csvInput').addEventListener('change',e=>{if(e.target.files?.[0])importCSV(e.target.files[0])});el('boxImportBtn').onclick=()=>el('boxExcelInput').click();el('boxExcelInput').addEventListener('change',e=>{if(e.target.files?.[0])importBoxes(e.target.files[0])});el('exportBtn').onclick=exportCSV;el('collectionBtn').onclick=openCollection;el('closeCollection').onclick=closeCollection;el('cancelCollection').onclick=closeCollection;el('addCollectionItem').onclick=()=>addCollectionItem();el('collectionLoad').onchange=()=>{if(!editingCollectionId)syncCollectionDriver();renderSavedCollections(el('collectionLoad').value)};el('collectionPdf').onchange=e=>{if(e.target.files?.[0])importCollectionPDF(e.target.files[0])};el('collectionPhotos').onchange=e=>addPhotos(e.target.files||[]);el('collectionCamera').onchange=e=>addPhotos(e.target.files||[]);el('extractPhotosBtn').onclick=importCollectionPhotos;el('photoQueue').addEventListener('click',e=>{const up=e.target.closest('[data-photo-up]'),down=e.target.closest('[data-photo-down]'),remove=e.target.closest('[data-photo-remove]');let i=Number((up||down||remove)?.dataset.photoUp??(up||down||remove)?.dataset.photoDown??(up||down||remove)?.dataset.photoRemove);if(!Number.isFinite(i))return;if(remove){URL.revokeObjectURL(photoUrls[i]);photoFiles.splice(i,1);photoUrls.splice(i,1)}else{const j=i+(up?-1:1);[photoFiles[i],photoFiles[j]]=[photoFiles[j],photoFiles[i]];[photoUrls[i],photoUrls[j]]=[photoUrls[j],photoUrls[i]]}renderPhotoQueue()});el('savedCollections').addEventListener('click',e=>{const b=e.target.closest('[data-edit-collection]');if(b){const item=collections.find(c=>c.id===b.dataset.editCollection);if(item)openCollection(item)}});el('collectionOverlay').addEventListener('click',e=>{if(e.target===el('collectionOverlay'))closeCollection()});el('collectionForm').addEventListener('submit',saveCollection);
+el('driver').addEventListener('change',()=>{const name=normCell(el('driver').value),driver=(catalog.drivers||[]).find(d=>normCell(catalogName(d))===name);if(driver&&personValue(driver,'active')!=='false'&&personValue(driver,'fixedHelperId')){const helper=(catalog.helpers||[]).find(h=>personId(h)===personValue(driver,'fixedHelperId')&&personValue(h,'active')!=='false');if(helper&&!el('helper1').value)el('helper1').value=catalogName(helper)}});el('clearScaleBtn').onclick=clearScaleProtected;el('sourceImportBtn').onclick=()=>el('sourceExcelInput').click();el('sourceExcelInput').addEventListener('change',e=>{if(e.target.files?.[0])importFirstPass(e.target.files[0])});el('closeModal').onclick=closeForm;el('cancelBtn').onclick=closeForm;el('overlay').addEventListener('click',e=>{if(e.target===el('overlay'))closeForm()});el('importBtn').onclick=()=>el('csvInput').click();el('csvInput').addEventListener('change',e=>{if(e.target.files?.[0])importCSV(e.target.files[0])});el('boxImportBtn').onclick=()=>el('boxExcelInput').click();el('boxExcelInput').addEventListener('change',e=>{if(e.target.files?.[0])importBoxes(e.target.files[0])});el('exportBtn').onclick=exportCSV;el('collectionBtn').onclick=openCollection;el('closeCollection').onclick=closeCollection;el('cancelCollection').onclick=closeCollection;el('addCollectionItem').onclick=()=>addCollectionItem();el('collectionLoad').onchange=()=>{if(!editingCollectionId)syncCollectionDriver();renderSavedCollections(el('collectionLoad').value)};el('collectionPdf').onchange=e=>{if(e.target.files?.[0])importCollectionPDF(e.target.files[0])};el('collectionPhotos').onchange=e=>addPhotos(e.target.files||[]);el('collectionCamera').onchange=e=>addPhotos(e.target.files||[]);el('extractPhotosBtn').onclick=importCollectionPhotos;el('photoQueue').addEventListener('click',e=>{const up=e.target.closest('[data-photo-up]'),down=e.target.closest('[data-photo-down]'),remove=e.target.closest('[data-photo-remove]');let i=Number((up||down||remove)?.dataset.photoUp??(up||down||remove)?.dataset.photoDown??(up||down||remove)?.dataset.photoRemove);if(!Number.isFinite(i))return;if(remove){URL.revokeObjectURL(photoUrls[i]);photoFiles.splice(i,1);photoUrls.splice(i,1)}else{const j=i+(up?-1:1);[photoFiles[i],photoFiles[j]]=[photoFiles[j],photoFiles[i]];[photoUrls[i],photoUrls[j]]=[photoUrls[j],photoUrls[i]]}renderPhotoQueue()});el('savedCollections').addEventListener('click',e=>{const b=e.target.closest('[data-edit-collection]');if(b){const item=collections.find(c=>c.id===b.dataset.editCollection);if(item)openCollection(item)}});el('collectionOverlay').addEventListener('click',e=>{if(e.target===el('collectionOverlay'))closeCollection()});el('collectionForm').addEventListener('submit',saveCollection);
 el('catalogImportBtn').onclick=()=>el('catalogInput').click();el('catalogInput').addEventListener('change',e=>{if(e.target.files?.[0])importCatalog(e.target.files[0])});
 el('rows').addEventListener('click',e=>{const viewSheet=e.target.closest('[data-view-departure-sheet]');if(viewSheet){viewDepartureSheet(viewSheet.dataset.viewDepartureSheet);return}const confirmDeparture=e.target.closest('[data-confirm-cd-departure]');if(confirmDeparture){confirmCDDeparture(confirmDeparture.dataset.confirmCdDeparture);return}const release=e.target.closest('[data-release-collection]');if(release){releaseCollection(release.dataset.releaseCollection);return}const openFinance=e.target.closest('[data-open-finance]');if(openFinance){financeLoad=openFinance.dataset.openFinance;showMainView('finance');showFinanceSubtab('loads');renderFinance();return}const view=e.target.closest('[data-view-collections]');if(view){const load=view.dataset.viewCollections;const linked=collections.filter(c=>normCell(c.load)===normCell(load));if(linked.length)openCollection(linked[0]);else{const row=records.find(r=>normCell(r.load)===normCell(load));openCollection();if(row){el('collectionLoad').value=row.load;syncCollectionDriver();renderSavedCollections(row.load)}}return}const b=e.target.closest('[data-edit]');if(b){const item=records.find(r=>r.id===b.dataset.edit);if(item)openForm(item)}});
 el('driver').addEventListener('change',()=>{const selected=catalog.drivers.find(x=>normCell(catalogName(x))===normCell(el('driver').value));if(selected&&typeof selected==='object'&&selected.plate)el('vehicle').value=selected.plate});
